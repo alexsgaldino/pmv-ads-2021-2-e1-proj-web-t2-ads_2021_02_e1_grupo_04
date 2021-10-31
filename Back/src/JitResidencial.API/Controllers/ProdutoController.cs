@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JIT_Residencial.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using JitResidencial.API.Data;
 
 namespace JitResidencial.API.Controllers
 {
@@ -13,49 +14,21 @@ namespace JitResidencial.API.Controllers
     [Route("[controller]")]
     public class ProdutoController : ControllerBase
     {
-        public IEnumerable<Produto> _produto = new Produto[] 
+        private readonly DataContext _context;
+        public ProdutoController(DataContext context)
         {
-            new Produto()
-            {
-                Id = 1,
-                CodigoBarras = "1234567",
-                NomeProduto = "Açucar Cristal",
-                Quantidade = 10,
-                Volume = "5 KG",
-                DataValidade = DateTime.Now.AddDays(0).ToString()
-            },
-            new Produto()
-            {
-                Id = 2,
-                CodigoBarras = "2345678",
-                NomeProduto = "Arroz Prato Fino",
-                Quantidade = 20,
-                Volume = "5 KG",
-                DataValidade = DateTime.Now.AddDays(0).ToString()
-            },
-            new Produto()
-            {
-                Id = 3,
-                CodigoBarras = "3456789",
-                NomeProduto = "Feijão Carioquinha",
-                Quantidade = 10,
-                Volume = "1 KG",
-                DataValidade = DateTime.Now.AddDays(0).ToString()
-            }
-        };
-        public ProdutoController()
-        {
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Produto> Get()
         {
-            return _produto;
+            return _context.Produtos;
         }
         [HttpGet("{id}")]
-        public IEnumerable<Produto> GetById(int id)
+        public Produto GetById(int id)
         {
-            return _produto.Where(produto => produto.Id == id);
+            return _context.Produtos.FirstOrDefault(produto => produto.Id == id);
         }
         [HttpPost("{id}")]
         public string Post()
