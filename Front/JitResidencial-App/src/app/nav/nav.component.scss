@@ -1,0 +1,19 @@
+.navbar {
+  background-color: rgb(24, 2, 87);
+
+}
+.nav-item a, .navbar-brand {
+  color: white;
+}
+.nav-item a:hover {
+  color: gray;
+}
+.nav-item .disabled {
+  color: blueviolet;
+}
+.navbar-brand {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 1.4em;
+
+}
