@@ -11,11 +11,11 @@ using JitResidencial.API.Data;
 namespace JitResidencial.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class ProdutoController : ControllerBase
+    [Route("api/[controller]")]
+    public class ProdutosController : ControllerBase
     {
         private readonly DataContext _context;
-        public ProdutoController(DataContext context)
+        public ProdutosController(DataContext context)
         {
             _context = context;
         }

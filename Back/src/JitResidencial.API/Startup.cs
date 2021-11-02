@@ -49,9 +49,9 @@ namespace JitResidencial.API
 
             app.UseAuthorization();
 
-            app.UseCors(x => x.AllowAnyHeader()
-                              .AllowAnyMethod()
-                              .AllowAnyOrigin()
+            app.UseCors(corsConection => corsConection.AllowAnyHeader()
+                                                      .AllowAnyMethod()
+                                                      .AllowAnyOrigin()
             );
 
             app.UseEndpoints(endpoints =>

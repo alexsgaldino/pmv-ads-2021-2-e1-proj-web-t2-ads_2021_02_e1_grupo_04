@@ -10,7 +10,6 @@ export class ProdutosComponent implements OnInit {
 
   public produtos: any = [];
   public produtosFiltrados: any = [];
-
   private _filtroLista: string = '';
 
   public get filtroLista(): string {
@@ -19,19 +18,18 @@ export class ProdutosComponent implements OnInit {
 
   public set filtroLista(value: string) {
     this._filtroLista = value;
-    this.produtosFiltrados = this._filtroLista ? this.filtrarEventos(this.filtroLista) : this.produtos;
+    this.produtosFiltrados = this._filtroLista ? this.filtrarProdutos(this.filtroLista) : this.produtos;
   }
 
-  filtrarEventos(filtrarPor: string): any {
+  filtrarProdutos(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.produtos.filter(
       (produto: any) => produto.nomeProduto.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-                  produto.quantidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-                  produto.volume.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-                  produto.dataVencimento.toLocaleLowerCase().indexOf(filtrarPor)
+                        produto.volume.toLocaleLowerCase().indexOf(filtrarPor) !== -1 
 
-    );
-  }
+      );
+    }
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

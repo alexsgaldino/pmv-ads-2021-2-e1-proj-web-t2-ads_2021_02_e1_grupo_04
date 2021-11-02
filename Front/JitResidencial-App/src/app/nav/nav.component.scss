@@ -1,12 +1,12 @@
 .navbar {
-  background-color: rgb(24, 2, 87);
+  background-color: rgb(3, 4, 85);
 
 }
 .nav-item a, .navbar-brand {
   color: white;
 }
 .nav-item a:hover {
-  color: gray;
+  color: lightgray;
 }
 .nav-item .disabled {
   color: blueviolet;
@@ -15,5 +15,7 @@
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
   font-size: 1.4em;
-
+}
+.navbar .navbar-toggler .navbar-toggler-icon {
+  background-color: rgb(87, 7, 192) ;
 }
