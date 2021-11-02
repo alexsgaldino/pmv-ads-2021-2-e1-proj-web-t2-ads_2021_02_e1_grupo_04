@@ -1,5 +1,8 @@
-
-using JitResidencial.API.Data;
+using JitResidencial.Application;
+using JitResidencial.Application.Contratos;
+using JitResidencial.Persistence;
+using JitResidencial.Persistence.Contextos;
+using JitResidencial.Persistence.Contratos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,10 +25,19 @@ namespace JitResidencial.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(
+            services.AddDbContext<JitResidencialContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(
+                        x => x.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
+
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IGeralPersist, GeralPersist>();
+            services.AddScoped<IProdutoPersist, ProdutoPersist>(); 
+
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
