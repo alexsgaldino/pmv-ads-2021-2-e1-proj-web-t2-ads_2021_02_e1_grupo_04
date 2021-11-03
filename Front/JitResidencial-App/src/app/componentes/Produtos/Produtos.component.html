@@ -1,10 +1,9 @@
-
-<h2>Produtos</h2>
-<hr>
-<p>{{produtos | json}}</p>
+<app-titulo [titulo]="'Produto'"></app-titulo>
+<!-- <p>{{produtos | json}}</p> -->
 <div class="form-inline" >
+
   <div class="form-group mb-2">
-    <label class="mr-2">Filtro: </label>
+    <label >Filtro:</label>
     <input
     type="text"
     class="form-control mr-2"
@@ -33,14 +32,16 @@
       <td>{{produto.nomeProduto}}</td>
       <td>{{produto.quantidade}}</td>
       <td>{{produto.volume}}</td>
-      <td>{{produto.dataValidade}}</td>
+      <td>{{produto.dataValidade | DateTimeFormatPipe}}</td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm mr-2">
-          <span class="fas-solid fas-pencil">Editar</span>
-        </button>
-        <button type="button" class="btn btn-danger btn-sm mr-2">
-          <span class="fas-solid fas-pencil">Excluir</span>
-        </button>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-primary  " tooltip="Editar">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-danger "  tooltip="Excluir" (click)="openModal(template)">
+            <i class="fa fa-trash"></i>
+          </button>
+      </div>
       </td>
     </tr>
   </tbody>
@@ -52,3 +53,11 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #template>
+  <div class="modal-body modal-backdrop-bg text-center">
+    <p>Confirma a exclusão do produto?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>

@@ -1,0 +1,28 @@
+.navbar {
+  background-color: rgb(3, 4, 85);
+
+}
+.nav-item .nav-link, .navbar-brand {
+  color:white;
+}
+.nav-item .dropdown-item {
+  color:black;
+}
+.nav-item .nav-link:hover {
+  color: lightgray;
+}
+.nav-item .disabled {
+  color: rgb(66, 63, 82);
+}
+.navbar-brand {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 1.4em;
+  text-decoration: none;
+}
+.navbar .navbar-toggler .bars-icons {
+  color: white;
+}
+#navbarDropdownMenuLink {
+  cursor: pointer;
+}
