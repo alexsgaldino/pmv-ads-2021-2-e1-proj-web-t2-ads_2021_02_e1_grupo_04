@@ -19,39 +19,55 @@ namespace JitResidencial.Persistence
  
         public async Task<Usuario[]> GetAllUsuariosAsync()
         {
-            IQueryable<Usuario> query = _context.Usuarios
-                .Include(us => us.Grupos)
-                .Include(us => us.Endereco);
+            IQueryable<Usuario> query = _context.Usuarios;
 
             query = query.AsNoTracking().OrderBy(us => us.Id);
 
             return await query.ToArrayAsync();
         }
 
-        public async Task<Usuario[]> GetAllUsuariosByNomeAsync(string nome)
+        public async Task<Usuario[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome)
         {
-            IQueryable<Usuario> query = _context.Usuarios
-                .Include(us => us.Grupos)
-                .Include(us => us.Endereco);
+            IQueryable<Usuario> query = _context.Usuarios;
 
             query = query.AsNoTracking().OrderBy(us => us.PrimeiroNome)
                     .Where(us => us.PrimeiroNome
                         .ToLower()
-                        .Contains(nome.ToLower()));
+                        .Contains(primeiroNome.ToLower()));
 
             return await query.ToArrayAsync();
         }
 
         public async Task<Usuario[]> GetAllUsuariosBySobrenomeAsync(string sobrenome)
         {
-            IQueryable<Usuario> query = _context.Usuarios
-                .Include(us => us.Grupos)
-                .Include(us => us.Endereco);
+            IQueryable<Usuario> query = _context.Usuarios;
 
             query = query.AsNoTracking().OrderBy(us => us.Sobrenome)
                     .Where(us => us.Sobrenome
                         .ToLower()
                         .Contains(sobrenome.ToLower()));
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Usuario[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin)
+        {
+            IQueryable<Usuario> query = _context.Usuarios;
+
+            query = query.AsNoTracking().OrderBy(us => us.UsuarioLogin)
+                    .Where(us => us.UsuarioLogin
+                        .ToLower()
+                        .Contains(usuarioLogin.ToLower()));
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Usuario[]> GetAllUsuariosByEmailAsync(string email)
+        {
+            IQueryable<Usuario> query = _context.Usuarios;
+
+            query = query.AsNoTracking().OrderBy(us => us.Email)
+                    .Where(us => us.Email
+                        .ToLower()
+                        .Contains(email.ToLower()));
 
             return await query.ToArrayAsync();
         }

@@ -6,6 +6,7 @@ export interface Usuario {
   id: number;
   primeiroNome: string;
   sobrenome: string;
+  usuarioLogin: string;
   telefone: string;
   email: string;
   senha: string;

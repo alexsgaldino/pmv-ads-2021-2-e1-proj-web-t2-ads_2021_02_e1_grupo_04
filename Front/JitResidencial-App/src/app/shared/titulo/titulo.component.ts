@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ListaPrecoComponent } from 'src/app/components/listaPreco/listaPreco.component';
 
 @Component({
   selector: 'app-titulo',
@@ -6,12 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./titulo.component.scss']
 })
 export class TituloComponent implements OnInit {
-  @Input() titulo!: string;
+  @Input() titulo = "Padrão";
+  @Input() iconClass = "fa fa-store";
+  @Input() subtitulo = "by PUC-MINAS EAD";
+  @Input() botaoListar = false;
+  @Input() acao = "Cadastro"
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+    listar(): void{
+      console.log([`/${this.titulo.toLocaleLowerCase()}/lista`]);
+    this.router.navigate([`/${this.titulo.toLocaleLowerCase()}/lista`]);
   }
-
 }

@@ -1,27 +1,53 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoriaComponent } from './componentes/Categoria/Categoria.component';
-import { EnderecoComponent } from './componentes/Endereco/Endereco.component';
-import { EstoqueComponent } from './componentes/Estoque/Estoque.component';
-import { FornecedorComponent } from './componentes/Fornecedor/Fornecedor.component';
-import { GrupoComponent } from './componentes/Grupo/Grupo.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { ListaPrecoComponent } from './componentes/ListaPreco/ListaPreco.component';
-import { ProdutosComponent } from './componentes/Produtos/Produtos.component';
-import { UnidadeMedidaComponent } from './componentes/UnidadeMedida/UnidadeMedida.component';
-import { UsuarioComponent } from './componentes/Usuario/Usuario.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
+import { EnderecoComponent } from './components/usuario/endereco/endereco.component';
+import { EstoqueComponent } from './components/estoque/estoque.component';
+import { FornecedorComponent } from './components/fornecedor/fornecedor.component';
+import { GrupoComponent } from './components/usuario/grupo/grupo.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListaPrecoComponent } from './components/listaPreco/listaPreco.component';
+import { ProdutoDetalheComponent } from './components/produto/produtoDetalhe/produtoDetalhe.component';
+import { ProdutoListaComponent } from './components/produto/produtoLista/produtoLista.component';
+import { ProdutoComponent } from './components/produto/produto.component';
+import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida.component';
+import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
+import { LoginComponent } from './components/usuario/login/login.component';
+import { UsuarioPerfilComponent } from './components/usuario/usuarioPerfil/usuarioPerfil.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioListaComponent } from './components/usuario/usuarioLista/usuarioLista.component';
+
 
 const routes: Routes = [
-  { path: 'produtos', component: ProdutosComponent },
+  { path: 'usuario', redirectTo: 'usuario/lista' },
+  { path: 'produto', redirectTo: 'produto/lista' },
+  {
+    path: 'usuario', component: UsuarioComponent,
+    children: [
+        { path: 'login', component: LoginComponent },
+        { path: 'perfil/:id', component: UsuarioListaComponent },
+        { path: 'perfil', component: UsuarioPerfilComponent},
+        { path: 'lista', component: UsuarioListaComponent },
+        { path: 'cadastro', component: CadastroComponent },
+
+     ]
+  },
+  {
+    path: 'produto', component: ProdutoComponent,
+    children: [
+      {path: 'detalhe/:id', component: ProdutoDetalheComponent},
+      {path: 'detalhe', component: ProdutoDetalheComponent},
+      {path: 'lista', component: ProdutoListaComponent},
+    ]
+   },
   { path: 'categoria', component: CategoriaComponent },
-  { path: 'endereco', component: EnderecoComponent },
+  { path: 'user/endereco', component: EnderecoComponent },
   { path: 'estoque', component: EstoqueComponent },
   { path: 'fornecedor', component: FornecedorComponent },
-  { path: 'grupo', component: GrupoComponent },
+  { path: 'usuario/grupo', component: GrupoComponent },
   { path: 'home', component: HomeComponent },
   { path: 'listapreco', component: ListaPrecoComponent },
   { path: 'unidadeMedida', component: UnidadeMedidaComponent },
-  { path: 'usuario', component: UsuarioComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 

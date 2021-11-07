@@ -6,8 +6,10 @@ namespace JitResidencial.Persistence.Contratos
 {
     public interface IUsuarioPersist
     {
-        Task<Usuario[]> GetAllUsuariosByNomeAsync(string nome);
+        Task<Usuario[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome);
         Task<Usuario[]> GetAllUsuariosBySobrenomeAsync(string sobrenome);
+        Task<Usuario[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin);
+        Task<Usuario[]> GetAllUsuariosByEmailAsync(string email);
         Task<Usuario[]> GetAllUsuariosAsync();
         Task<Usuario> GetUsuarioByIdAsync(int usuarioId);
     }

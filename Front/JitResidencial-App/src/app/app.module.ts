@@ -22,23 +22,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
 /* ---------------------- Serices IMPORTS ---------------------- */
-import { ProdutoService } from './Services/produto.service';
+import { ProdutoService } from './Services/produto/produto.service';
 
 /* ---------------------- COMPONENTS IMPORTS ---------------------- */
-import { CategoriaComponent }     from './componentes/Categoria/Categoria.component';
-import { EnderecoComponent }      from './componentes/Endereco/Endereco.component';
-import { EstoqueComponent }       from './componentes/Estoque/Estoque.component';
+import { CategoriaComponent }     from './components/categoria/categoria.component';
+import { EnderecoComponent }      from './components/usuario/endereco/endereco.component';
+import { EstoqueComponent }       from './components/estoque/estoque.component';
 import { FooterComponent }        from './shared/footer/footer.component';
-import { FornecedorComponent }    from './componentes/Fornecedor/Fornecedor.component';
-import { GrupoComponent }         from './componentes/Grupo/Grupo.component';
-import { HomeComponent }          from './componentes/home/home.component';
-import { ListaPrecoComponent }    from './componentes/ListaPreco/ListaPreco.component';
+import { FornecedorComponent }    from './components/fornecedor/fornecedor.component';
+import { GrupoComponent }         from './components/usuario/grupo/grupo.component';
+import { HomeComponent }          from './components/home/home.component';
+import { ListaPrecoComponent }    from './components/listaPreco/listaPreco.component';
 import { NavComponent }           from './shared/nav/nav.component';
-import { ProdutosComponent }      from './componentes/Produtos/Produtos.component';
-import { TituloComponent }        from './shared/titulo/Titulo.component';
-import { UnidadeMedidaComponent } from './componentes/UnidadeMedida/UnidadeMedida.component';
-import { UsuarioComponent }       from './componentes/Usuario/Usuario.component';
-
+import { ProdutoComponent }      from './components/produto/produto.component';
+import { TituloComponent }        from './shared/titulo/titulo.component';
+import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida.component';
+import { UsuarioComponent }       from './components/usuario/usuario.component';
+import { ProdutoDetalheComponent } from './components/produto/produtoDetalhe/produtoDetalhe.component';
+import { ProdutoListaComponent } from './components/produto/produtoLista/produtoLista.component';
+import { LoginComponent } from './components/usuario/login/login.component';
+import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
+import { UsuarioPerfilComponent } from './components/usuario/usuarioPerfil/usuarioPerfil.component';
+import { UsuarioListaComponent } from './components/usuario/usuarioLista/usuarioLista.component';
+import { UsuarioService } from './Services/usuario/usuario.service';
 
 @NgModule({
   declarations: [
@@ -53,10 +59,16 @@ import { UsuarioComponent }       from './componentes/Usuario/Usuario.component'
     HomeComponent,
     ListaPrecoComponent,
     NavComponent,
-    ProdutosComponent,
+    ProdutoComponent,
     TituloComponent,
     UnidadeMedidaComponent,
     UsuarioComponent,
+    ProdutoDetalheComponent,
+    ProdutoListaComponent,
+    LoginComponent,
+    CadastroComponent,
+    UsuarioPerfilComponent,
+    UsuarioListaComponent,
    ],
   imports: [
     AppRoutingModule,
@@ -77,7 +89,7 @@ import { UsuarioComponent }       from './componentes/Usuario/Usuario.component'
     }),
     TooltipModule.forRoot(),
   ],
-  providers: [ProdutoService],
+  providers: [ProdutoService, UsuarioService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

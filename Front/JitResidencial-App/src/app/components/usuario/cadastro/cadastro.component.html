@@ -1,0 +1,77 @@
+<app-titulo [titulo]="'usuario'"
+            [iconClass]="'fas fa-user-check'"
+            [subtitulo]="'by PUC-MINAS EAD 2021'"
+            [botaoListar]="true"
+            [acao]="'Cadastro'">
+</app-titulo>
+<div class="container">
+  <div class="card-header">
+    <div class="form-group col-12">
+      Cadastro de Usuário
+    </div>
+  </div>
+  <div class=" row text-white mb-3">
+    <h4>
+      Cadastre-se e tenha uma experiência com o abastecimento de sua dispensa!
+    </h4>
+    <div class="row mt-4">
+      <div class="col-md-6 d-none d-lg-block" >
+        <div div  class="text-center col-md-12 my-auto side-heder">
+         <img id="imagemCadastro" src="../../../../assets/Jit.png" alt="" >
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form ngClass="row g-3">
+          <div class=" col-lg-4 col-sm-2 col-xs-8">
+            <label class="form-label">Primeiro Nome</label>
+            <input type="text" class="form-control" placeholder="Insira o Primeiro nome" />
+          </div>
+          <div class=" col-lg-8 col-sm-4 col-xs-8">
+            <label class="form-label">Sobrenome</label>
+            <input type="text" class="form-control" placeholder="Insira o Sobrenome" />
+          </div>
+          <div class=" col-lg-8 col-sm-4 col-xs-8">
+            <label class="form-label">Email:</label>
+            <input class="form-control" type="email" placeholder="Insira seu e-mail" />
+          </div>
+          <div class=" col-lg-4 col-sm-4 col-xs-8">
+            <label class="" for="">Usuario:</label>
+            <input class="form-control" type="text" placeholder="Insira seu usuario" />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <label class="form-label" for="">Senha:</label>
+              <input class="form-control" type="password" placeholder="Digite uma Senha" />
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="form-label" for="">Confirmar Senha:</label>
+              <input class="form-control" type="password" placeholder="Confirme a Senha" />
+            </div>
+          </div>
+          <div class="form-row p-1 mb-3">
+            <div class="custom-control form-checkbox">
+              <input type="checkbox" class="form-checkbox-input" id="customCheck1">
+              <label class="form-check-label">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12 d-flex justify-content-end">
+                <button class="btn btn-lg btn-dark" [routerLink]="['/usuario/perfil']" >
+                  <b>Registrar</b>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <a class="btn btn-link btn-block" [routerLink]="['/usuario/login']">
+               Já sou Cadastrado
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

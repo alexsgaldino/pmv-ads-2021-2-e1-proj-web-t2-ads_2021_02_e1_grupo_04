@@ -34,9 +34,13 @@ namespace JitResidencial.API
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
 
-            services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
+
+            services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoPersist, ProdutoPersist>(); 
+
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUsuarioPersist, UsuarioPersist>(); 
 
             services.AddCors();
             services.AddSwaggerGen(c =>
