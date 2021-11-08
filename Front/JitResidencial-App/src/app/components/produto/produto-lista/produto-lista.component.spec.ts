@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ProdutoListaComponent } from './produtoLista.component';
+import { ProdutoListaComponent } from './produto-lista.component';
 
 describe('ProdutoListaComponent', () => {
   let component: ProdutoListaComponent;

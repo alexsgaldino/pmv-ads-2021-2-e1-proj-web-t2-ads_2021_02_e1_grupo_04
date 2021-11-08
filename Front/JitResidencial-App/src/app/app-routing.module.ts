@@ -3,19 +3,32 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { EnderecoComponent } from './components/usuario/endereco/endereco.component';
 import { EstoqueComponent } from './components/estoque/estoque.component';
-import { FornecedorComponent } from './components/fornecedor/fornecedor.component';
-import { GrupoComponent } from './components/usuario/grupo/grupo.component';
-import { HomeComponent } from './components/home/home.component';
-import { ListaPrecoComponent } from './components/listaPreco/listaPreco.component';
-import { ProdutoDetalheComponent } from './components/produto/produtoDetalhe/produtoDetalhe.component';
-import { ProdutoListaComponent } from './components/produto/produtoLista/produtoLista.component';
-import { ProdutoComponent } from './components/produto/produto.component';
-import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida.component';
-import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
-import { LoginComponent } from './components/usuario/login/login.component';
-import { UsuarioPerfilComponent } from './components/usuario/usuarioPerfil/usuarioPerfil.component';
-import { UsuarioComponent } from './components/usuario/usuario.component';
-import { UsuarioListaComponent } from './components/usuario/usuarioLista/usuarioLista.component';
+import { FornecedorComponent }
+        from './components/fornecedor/fornecedor.component';
+import { GrupoComponent }
+        from './components/usuario/grupo/grupo.component';
+import { HomeComponent }
+        from './components/home/home.component';
+import { ListaPrecoComponent }
+        from './components/listaPreco/listaPreco.component';
+import { ProdutoDetalheComponent }
+        from './components/produto/produto-detalhe/produto-detalhe.component';
+import { ProdutoListaComponent }
+        from './components/produto/produto-lista/produto-lista.component';
+import { ProdutoComponent }
+        from './components/produto/produto.component';
+import { UnidadeMedidaComponent }
+        from './components/unidadeMedida/unidadeMedida.component';
+import { CadastroComponent }
+        from './components/usuario/usuario-cadastro/usuario-cadastro.component';
+import { LoginComponent }
+        from './components/usuario/usuario-login/usuario-login.component';
+import { UsuarioPerfilComponent }
+        from './components/usuario/usuario-perfil/usuario-perfil.component';
+import { UsuarioComponent }
+        from './components/usuario/usuario.component';
+import { UsuarioListaComponent }
+        from './components/usuario/usuarioLista/usuarioLista.component';
 
 
 const routes: Routes = [

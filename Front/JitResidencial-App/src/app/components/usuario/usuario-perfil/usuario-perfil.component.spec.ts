@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsuarioPerfilComponent } from 'src/app/components/usuario/usuarioPerfil/usuarioPerfil.component';
+import { UsuarioPerfilComponent } from '@app/components/usuario/usuario-perfil/usuario-perfil.component';
 
 describe('UsuarioPerfilComponent', () => {
   let component: UsuarioPerfilComponent;

@@ -1,17 +1,22 @@
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { BsModalRef, BsModalService }
+        from "ngx-bootstrap/modal";
 import { Component, OnInit, TemplateRef, ViewChild}
-                                      from "@angular/core";
-import { NgxSpinnerService }          from "ngx-spinner";
+        from "@angular/core";
+import { NgxSpinnerService }
+        from "ngx-spinner";
 import { ToastContainerDirective, ToastrService }
-                                      from "ngx-toastr";
-import { Produto } from "src/app/models/Produto";
-import { ProdutoService } from "src/app/Services/produto/produto.service";
-import { Router } from "@angular/router";
+        from "ngx-toastr";
+import { Produto }
+        from "src/app/models/Produto";
+import { ProdutoService }
+        from "src/app/Services/produto/produto.service";
+import { Router }
+        from "@angular/router";
 
 @Component ({
   selector: 'app-produtos',
-  templateUrl: './produtoLista.component.html',
-  styleUrls: ['./produtoLista.component.scss']
+  templateUrl: './produto-lista.component.html',
+  styleUrls: ['./produto-lista.component.scss']
 })
 export class ProdutoListaComponent implements OnInit {
   modalRef!: BsModalRef;
