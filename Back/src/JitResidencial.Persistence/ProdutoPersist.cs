@@ -18,13 +18,7 @@ namespace JitResidencial.Persistence
         }
         public async Task<Produto[]> GetAllProdutosAsync()
         {
-            IQueryable<Produto> query = _context.Produtos
-                .Include(p => p.UnidadesMedidas)
-                .Include(p => p.Categorias)
-                .Include(p => p.Movimentos)
-                .Include(p => p.Estoques)
-                .Include(p => p.ListasPrecos)
-                .Include(p => p.Fornecedores);
+            IQueryable<Produto> query = _context.Produtos;
 
             query = query.AsNoTracking().OrderBy(p => p.Id);
 
@@ -32,13 +26,7 @@ namespace JitResidencial.Persistence
         }
         public async Task<Produto[]> GetAllProdutosByCodigoBarraAsync(string codigoBarras)
         {
-            IQueryable<Produto> query = _context.Produtos
-                .Include(p => p.UnidadesMedidas)
-                .Include(p => p.Categorias)
-                .Include(p => p.Movimentos)
-                .Include(p => p.Estoques)
-                .Include(p => p.ListasPrecos)
-                .Include(p => p.Fornecedores);
+            IQueryable<Produto> query = _context.Produtos;
 
             query = query.AsNoTracking().OrderBy(p => p.CodigoBarras)
                     .Where(p => p.CodigoBarras
@@ -49,13 +37,7 @@ namespace JitResidencial.Persistence
         }
         public async Task<Produto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto)
         {
-            IQueryable<Produto> query = _context.Produtos
-                .Include(p => p.UnidadesMedidas)
-                .Include(p => p.Categorias)
-                .Include(p => p.Movimentos)
-                .Include(p => p.Estoques)
-                .Include(p => p.ListasPrecos)
-                .Include(p => p.Fornecedores);
+            IQueryable<Produto> query = _context.Produtos;
 
             query = query.AsNoTracking().OrderBy(p => p.NomeProduto)
                     .Where(p => p.NomeProduto
@@ -66,13 +48,7 @@ namespace JitResidencial.Persistence
         }
         public async Task<Produto> GetProdutoByIdAsync(int produtoId)
         {
-            IQueryable<Produto> query = _context.Produtos
-                .Include(p => p.UnidadesMedidas)
-                .Include(p => p.Categorias)
-                .Include(p => p.Movimentos)
-                .Include(p => p.Estoques)
-                .Include(p => p.ListasPrecos)
-                .Include(p => p.Fornecedores);
+            IQueryable<Produto> query = _context.Produtos;
 
             query = query.AsNoTracking().OrderBy(p => p.Id)
                     .Where(p => p.Id == produtoId);

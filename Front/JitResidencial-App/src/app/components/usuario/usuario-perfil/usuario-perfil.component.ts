@@ -57,7 +57,8 @@ export class UsuarioPerfilComponent implements OnInit {
                             ]],
       }, formOptions);
   }
-  resetForm(): void {
+  resetForm(event: any): void {
+    event.preventDefault();
     this.form.reset();
    }
 }

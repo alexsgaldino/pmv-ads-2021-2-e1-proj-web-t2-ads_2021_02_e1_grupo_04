@@ -1,21 +1,21 @@
 using System.Threading.Tasks;
-using JitResidencial.Domain;
+using JitResidencial.Application.Dtos;
 
 namespace JitResidencial.Application.Contratos
 {
     public interface IUsuarioService
     {
 
-        Task<Usuario> AddUsuario(Usuario model);
-        Task<Usuario> UpdateUsuario(int usuarioId, Usuario model);
+        Task<UsuarioDto> AddUsuario(UsuarioDto model);
+        Task<UsuarioDto> UpdateUsuario(int usuarioId, UsuarioDto model);
         Task<bool> DeleteUsuario(int produtoId);
         
-        Task<Usuario[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome);
-        Task<Usuario[]> GetAllUsuariosBySobrenomeAsync(string sobrenome);
-        Task<Usuario[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin);
-        Task<Usuario[]> GetAllUsuariosByEmailAsync(string email);
-        Task<Usuario[]> GetAllUsuariosAsync();
-        Task<Usuario> GetUsuarioByIdAsync(int usuarioId);
+        Task<UsuarioDto[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome);
+        Task<UsuarioDto[]> GetAllUsuariosBySobrenomeAsync(string sobrenome);
+        Task<UsuarioDto[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin);
+        Task<UsuarioDto[]> GetAllUsuariosByEmailAsync(string email);
+        Task<UsuarioDto[]> GetAllUsuariosAsync();
+        Task<UsuarioDto> GetUsuarioByIdAsync(int usuarioId);
     }
 
 }

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsuarioListaComponent } from './usuarioLista.component';
+import { UsuarioListaComponent } from './usuario-lista.component';
 
 
 describe('UsuarioListaComponent', () => {

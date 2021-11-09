@@ -2,7 +2,9 @@
 
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using JitResidencial.Application.Contratos;
+using JitResidencial.Application.Dtos;
 using JitResidencial.Domain;
 using JitResidencial.Persistence.Contratos;
 
@@ -13,19 +15,27 @@ namespace JitResidencial.Application
         private readonly IGeralPersist _geralPersist;
         private readonly IUsuarioPersist _usuarioPersist;
 
-        public UsuarioService(IGeralPersist geralPersist, IUsuarioPersist usuarioPersist)
+        private readonly IMapper _mapper;
+
+        public UsuarioService(  IGeralPersist geralPersist, 
+                                IUsuarioPersist usuarioPersist,
+                                IMapper mapper)
         {
-            _usuarioPersist = usuarioPersist;
             _geralPersist = geralPersist;
+            _usuarioPersist = usuarioPersist;
+            _mapper = mapper;
         }
-        public async Task<Usuario> AddUsuario(Usuario model)
+        public async Task<UsuarioDto> AddUsuario( UsuarioDto model)
         {
             try
             {
-                 _geralPersist.Add<Usuario>(model);
+                var usuario = _mapper.Map<Usuario>(model);
+                 _geralPersist.Add<Usuario>(usuario);
+
                  if (await _geralPersist.SaveChangesAsync())
                  {
-                     return await _usuarioPersist.GetUsuarioByIdAsync(model.Id);
+                    var usuarioRetorno = await _usuarioPersist.GetUsuarioByIdAsync(usuario.Id);     
+                     return _mapper.Map<UsuarioDto>(usuarioRetorno); 
                  }
                  return null;
             }
@@ -54,7 +64,7 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<Usuario> UpdateUsuario(int usuarioId, Usuario model)
+        public async Task<UsuarioDto> UpdateUsuario(int usuarioId,  UsuarioDto model)
         {
             try
             {
@@ -65,10 +75,15 @@ namespace JitResidencial.Application
                 }
                 model.Id = usuario.Id;
 
-                _geralPersist.Update(model);
+                _mapper.Map(model, usuario);
+
+                _geralPersist.Update<Usuario>(usuario);
+                
                 if (await _geralPersist.SaveChangesAsync())
                 {
-                    return await _usuarioPersist.GetUsuarioByIdAsync(model.Id);
+                    var usuarioRetorno = await _usuarioPersist.GetUsuarioByIdAsync(usuario.Id);
+                    
+                    return _mapper.Map<UsuarioDto>(usuarioRetorno);
                 }
                 return null;                
 
@@ -83,14 +98,16 @@ namespace JitResidencial.Application
 
 
 
-        public async Task<Usuario[]> GetAllUsuariosAsync()
+        public async Task<UsuarioDto[]> GetAllUsuariosAsync()
         {
             try
             {
                  var usuarios = await _usuarioPersist.GetAllUsuariosAsync();
                  if (usuarios == null) return null;
 
-                 return usuarios;
+                  var usuariosRetorno = _mapper.Map<UsuarioDto[]>(usuarios);
+
+                return usuariosRetorno;
             }
             catch (Exception ex)
             {
@@ -99,14 +116,16 @@ namespace JitResidencial.Application
             }
         }
 
-        public async Task<Usuario[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome)
+        public async Task<UsuarioDto[]> GetAllUsuariosByPrimeiroNomeAsync(string primeiroNome)
         {
             try
             {
                  var usuarios = await _usuarioPersist.GetAllUsuariosByPrimeiroNomeAsync(primeiroNome);
                  if (usuarios == null) return null;
 
-                 return usuarios;
+                 var usuariosRetorno = _mapper.Map<UsuarioDto[]>(usuarios);
+
+                return usuariosRetorno;
             }
             catch (Exception ex)
             {
@@ -115,14 +134,16 @@ namespace JitResidencial.Application
             }
         }
 
-        public async Task<Usuario[]> GetAllUsuariosBySobrenomeAsync(string sobrenome)
+        public async Task<UsuarioDto[]> GetAllUsuariosBySobrenomeAsync(string sobrenome)
         {
             try
             {
                  var usuarios = await _usuarioPersist.GetAllUsuariosBySobrenomeAsync(sobrenome);
                  if (usuarios == null) return null;
 
-                 return usuarios;
+                  var usuariosRetorno = _mapper.Map<UsuarioDto[]>(usuarios);
+
+                return usuariosRetorno;
             }
             catch (Exception ex)
             {
@@ -130,14 +151,16 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<Usuario[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin)
+        public async Task<UsuarioDto[]> GetAllUsuariosByUsuarioLoginAsync(string usuarioLogin)
         {
             try
             {
                  var usuarios = await _usuarioPersist.GetAllUsuariosByUsuarioLoginAsync(usuarioLogin);
                  if (usuarios == null) return null;
 
-                 return usuarios;
+                 var usuariosRetorno = _mapper.Map<UsuarioDto[]>(usuarios);
+
+                return usuariosRetorno;
             }
             catch (Exception ex)
             {
@@ -145,14 +168,16 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-                public async Task<Usuario[]> GetAllUsuariosByEmailAsync(string email)
+                public async Task<UsuarioDto[]> GetAllUsuariosByEmailAsync(string email)
         {
             try
             {
                  var usuarios = await _usuarioPersist.GetAllUsuariosByEmailAsync(email);
                  if (usuarios == null) return null;
 
-                 return usuarios;
+                 var usuariosRetorno = _mapper.Map<UsuarioDto[]>(usuarios);
+
+                return usuariosRetorno;
             }
             catch (Exception ex)
             {
@@ -160,14 +185,16 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<Usuario> GetUsuarioByIdAsync(int usuarioId)
+        public async Task<UsuarioDto> GetUsuarioByIdAsync(int usuarioId)
         {
             try
             {
                 var usuario = await _usuarioPersist.GetUsuarioByIdAsync(usuarioId);
                 if (usuario == null) return null;
 
-                return usuario;
+                var usuarioRetorno = _mapper.Map<UsuarioDto>(usuario);
+
+                return usuarioRetorno;
             }
             catch (Exception ex)
             {

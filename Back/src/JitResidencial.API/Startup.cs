@@ -1,3 +1,4 @@
+using System;
 using JitResidencial.Application;
 using JitResidencial.Application.Contratos;
 using JitResidencial.Persistence;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace JitResidencial.API
 {
@@ -33,6 +35,8 @@ namespace JitResidencial.API
                         x => x.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IGeralPersist, GeralPersist>();
 

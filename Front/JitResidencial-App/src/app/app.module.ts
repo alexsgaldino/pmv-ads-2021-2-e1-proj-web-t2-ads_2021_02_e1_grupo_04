@@ -58,9 +58,10 @@ import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida
 import { UsuarioComponent }       from './components/usuario/usuario.component';
 import { ProdutoListaComponent }  from './components/produto/produto-lista/produto-lista.component';
 import { LoginComponent }         from './components/usuario/usuario-login/usuario-login.component';
-import { CadastroComponent }      from './components/usuario/usuario-cadastro/usuario-cadastro.component';
+import { UsuarioCadastroComponent }
+                                  from './components/usuario/usuario-cadastro/usuario-cadastro.component';
 import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
-import { UsuarioListaComponent }  from './components/usuario/usuarioLista/usuarioLista.component';
+import { UsuarioListaComponent }  from './components/usuario/usuarioLista/usuario-lista.component';
 import { UsuarioService }         from './Services/usuario/usuario.service';
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { UsuarioService }         from './Services/usuario/usuario.service';
     ProdutoDetalheComponent,
     ProdutoListaComponent,
     LoginComponent,
-    CadastroComponent,
+    UsuarioCadastroComponent,
     UsuarioPerfilComponent,
     UsuarioListaComponent,
    ],

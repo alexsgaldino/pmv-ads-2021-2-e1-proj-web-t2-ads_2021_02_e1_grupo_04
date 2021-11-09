@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using JitResidencial.Domain;
-using Microsoft.AspNetCore.Mvc;
-using JitResidencial.Persistence.Contextos;
+﻿using Microsoft.AspNetCore.Mvc;
 using JitResidencial.Application.Contratos;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Http;
+using JitResidencial.Application.Dtos;
 
 namespace JitResidencial.API.Controllers
 {
@@ -26,10 +23,11 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var produtos = await _eventoService.GetAllProdutosAsync();
-                 if (produtos == null) return NotFound("Nenhum produto encontrado");
+                 if (produtos == null) return NoContent();
 
                  return Ok(produtos);
             }
+
             catch (Exception ex)
             {
                 
@@ -43,7 +41,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var produto = await _eventoService.GetProdutoByIdAsync(id);
-                 if (produto == null) return NotFound("Nenhum produto por id foi encontrado");
+                 if (produto == null) return NoContent();
 
                  return Ok(produto);
             }
@@ -60,7 +58,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var produto = await _eventoService.GetAllProdutosByNomeProdutoAsync(nomeProduto);
-                 if (produto == null) return NotFound("Nenhum produto por nome produto foi encontrado");
+                 if (produto == null) return NoContent();
 
                  return Ok(produto);
             }
@@ -77,7 +75,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var produto = await _eventoService.GetAllProdutosByCodigoBarrasAsync(codigoBarras);
-                 if (produto == null) return NotFound("Nenhum produto por código de barras foi encontrado");
+                 if (produto == null) return NoContent();
 
                  return Ok(produto);
             }
@@ -89,12 +87,12 @@ namespace JitResidencial.API.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Post(Produto model)
+        public async Task<IActionResult> Post(ProdutoDto model)
         {
             try
             {
                  var produto = await _eventoService.AddProdutos(model);
-                 if (produto == null) return BadRequest("Erro ao tentar adicionar evento");
+                 if (produto == null) return NoContent();;
 
                  return Ok(produto);
             }
@@ -106,12 +104,12 @@ namespace JitResidencial.API.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Produto model)
+        public async Task<IActionResult> Put(int id, ProdutoDto model)
         {
             try
             {
                  var produto = await _eventoService.UpdateProduto(id, model);
-                 if (produto == null) return BadRequest("Erro ao tentar atualizar evento");
+                 if (produto == null) return NoContent();;
 
                  return Ok(produto);
             }

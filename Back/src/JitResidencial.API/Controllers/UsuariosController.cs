@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using JitResidencial.Application.Contratos;
-using JitResidencial.Domain;
+using JitResidencial.Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +24,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuario = await _usuarioService.GetAllUsuariosAsync();
-                 if (usuario == null) return NotFound("Nenhum usuario encontrado");
+                 if (usuario == null) return NoContent();
 
                  return Ok(usuario);
             }
@@ -41,7 +41,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuario = await _usuarioService.GetUsuarioByIdAsync(id);
-                 if (usuario == null) return NotFound("Nenhum produto por id foi encontrado");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }
@@ -58,7 +58,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuarios = await _usuarioService.GetAllUsuariosByPrimeiroNomeAsync(primeiroNome);
-                 if (usuarios == null) return NotFound("Nenhum usuario por primeiro nome foi encontrado");
+                 if (usuarios == null) return NoContent();;
 
                  return Ok(usuarios);
             }
@@ -75,7 +75,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuario = await _usuarioService.GetAllUsuariosBySobrenomeAsync(sobrenome);
-                 if (usuario == null) return NotFound("Nenhum usuario por sobrenome foi encontrado");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }
@@ -92,7 +92,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuario = await _usuarioService.GetAllUsuariosByUsuarioLoginAsync(usuarioLogin);
-                 if (usuario == null) return NotFound("Nenhum usuairo por usuario de login foi encontrado");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }
@@ -109,7 +109,7 @@ namespace JitResidencial.API.Controllers
             try
             {
                  var usuario = await _usuarioService.GetAllUsuariosByEmailAsync(email);
-                 if (usuario == null) return NotFound("Nenhum usuario por email foi encontrado");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }
@@ -121,12 +121,12 @@ namespace JitResidencial.API.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Post(Usuario model)
+        public async Task<IActionResult> Post(UsuarioDto model)
         {
             try
             {
                  var usuario = await _usuarioService.AddUsuario(model);
-                 if (usuario == null) return BadRequest("Erro ao tentar adicionar usuario.");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }
@@ -138,12 +138,12 @@ namespace JitResidencial.API.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Usuario model)
+        public async Task<IActionResult> Put(int id, UsuarioDto model)
         {
             try
             {
                  var usuario = await _usuarioService.UpdateUsuario(id, model);
-                 if (usuario == null) return BadRequest("Erro ao tentar atualizar usuario");
+                 if (usuario == null) return NoContent();;
 
                  return Ok(usuario);
             }

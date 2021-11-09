@@ -19,7 +19,7 @@ import { ProdutoComponent }
         from './components/produto/produto.component';
 import { UnidadeMedidaComponent }
         from './components/unidadeMedida/unidadeMedida.component';
-import { CadastroComponent }
+import { UsuarioCadastroComponent }
         from './components/usuario/usuario-cadastro/usuario-cadastro.component';
 import { LoginComponent }
         from './components/usuario/usuario-login/usuario-login.component';
@@ -28,7 +28,7 @@ import { UsuarioPerfilComponent }
 import { UsuarioComponent }
         from './components/usuario/usuario.component';
 import { UsuarioListaComponent }
-        from './components/usuario/usuarioLista/usuarioLista.component';
+        from './components/usuario/usuarioLista/usuario-lista.component';
 
 
 const routes: Routes = [
@@ -41,7 +41,7 @@ const routes: Routes = [
         { path: 'perfil/:id', component: UsuarioListaComponent },
         { path: 'perfil', component: UsuarioPerfilComponent},
         { path: 'lista', component: UsuarioListaComponent },
-        { path: 'cadastro', component: CadastroComponent },
+        { path: 'cadastro', component: UsuarioCadastroComponent },
 
      ]
   },

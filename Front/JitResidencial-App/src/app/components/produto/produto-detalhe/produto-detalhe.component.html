@@ -132,7 +132,7 @@
 
       <div class="">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-danger mr-auto border" (click)="resetForm()">
+          <button class="btn btn-danger mr-auto border" (click)="resetForm($event)">
             Cancelar Alteração
           </button>
           <button class="btn btn-outline-light" [disabled]="!form!.valid">

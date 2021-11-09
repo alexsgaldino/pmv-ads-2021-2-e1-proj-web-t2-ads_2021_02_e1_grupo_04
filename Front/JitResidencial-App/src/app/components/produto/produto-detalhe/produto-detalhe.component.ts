@@ -48,7 +48,8 @@ export class ProdutoDetalheComponent implements OnInit {
                                    ]],
       });
   }
-  resetForm(): void {
-   this.form.reset();
-  }
+  resetForm(event: any): void {
+    event.preventDefault();
+    this.form.reset();
+   }
 }

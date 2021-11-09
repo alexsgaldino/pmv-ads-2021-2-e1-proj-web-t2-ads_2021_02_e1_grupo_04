@@ -9,9 +9,9 @@ import { Usuario } from "src/app/models/Usuario";
 import { UsuarioService } from "src/app/Services/usuario/usuario.service";
 
 @Component ({
-  selector: 'app-usuario',
-  templateUrl: './usuarioLista.component.html',
-  styleUrls: ['./usuarioLista.component.scss']
+  selector: 'app-usuario-lista',
+  templateUrl: './usuario-lista.component.html',
+  styleUrls: ['./usuario-lista.component.scss']
 })
 export class UsuarioListaComponent implements OnInit {
   modalRef!: BsModalRef;

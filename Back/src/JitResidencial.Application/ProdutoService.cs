@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using JitResidencial.Application.Contratos;
 using JitResidencial.Domain;
 using JitResidencial.Persistence.Contratos;
+using JitResidencial.Application.Dtos;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace JitResidencial.Application
 {
@@ -12,19 +15,27 @@ namespace JitResidencial.Application
         private readonly IGeralPersist _geralPersist;
         private readonly IProdutoPersist _produtoPersist;
 
-        public ProdutoService(IGeralPersist geralPersist, IProdutoPersist produtoPersist)
+        private readonly IMapper _mapper;
+
+        public ProdutoService(  IGeralPersist geralPersist, 
+                                IProdutoPersist produtoPersist,
+                                IMapper mapper)
         {
-            _produtoPersist = produtoPersist;
             _geralPersist = geralPersist;
+            _produtoPersist = produtoPersist;
+            _mapper = mapper;
+   
         }
-        public async Task<Produto> AddProdutos(Produto model)
+        public async Task<ProdutoDto> AddProdutos(ProdutoDto model)
         {
             try
             {
-                 _geralPersist.Add<Produto>(model);
+                 var produto = _mapper.Map<Produto>(model);
+                 _geralPersist.Add<Produto>(produto);
                  if (await _geralPersist.SaveChangesAsync())
                  {
-                     return await _produtoPersist.GetProdutoByIdAsync(model.Id);
+                     var produtoRetorno = await _produtoPersist.GetProdutoByIdAsync(produto.Id);
+                    return _mapper.Map<ProdutoDto>(produtoRetorno); 
                  }
                  return null;
             }
@@ -53,7 +64,7 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<Produto> UpdateProduto(int produtoId, Produto model)
+        public async Task<ProdutoDto> UpdateProduto(int produtoId, ProdutoDto model)
         {
             try
             {
@@ -63,11 +74,15 @@ namespace JitResidencial.Application
                     return null;
                 }
                 model.Id = produto.Id;
+                
+                _mapper.Map(model, produto);
 
-                _geralPersist.Update(model);
+                _geralPersist.Update<Produto>(produto);
+                
                 if (await _geralPersist.SaveChangesAsync())
                 {
-                    return await _produtoPersist.GetProdutoByIdAsync(model.Id);
+                    var produtoRetorno =  await _produtoPersist.GetProdutoByIdAsync(produto.Id);
+                    return _mapper.Map<ProdutoDto>(produtoRetorno);
                 }
                 return null;                
 
@@ -82,14 +97,16 @@ namespace JitResidencial.Application
 
 
 
-        public async Task<Produto[]> GetAllProdutosAsync()
+        public async Task<ProdutoDto[]> GetAllProdutosAsync()
         {
             try
             {
                  var produtos = await _produtoPersist.GetAllProdutosAsync();
                  if (produtos == null) return null;
 
-                 return produtos;
+                var produtosRetorno = _mapper.Map<ProdutoDto[]>(produtos);
+                
+                return produtosRetorno;
             }
             catch (Exception ex)
             {
@@ -98,14 +115,16 @@ namespace JitResidencial.Application
             }
         }
 
-        public async Task<Produto[]> GetAllProdutosByCodigoBarrasAsync(string codigoBarras)
+        public async Task<ProdutoDto[]> GetAllProdutosByCodigoBarrasAsync(string codigoBarras)
         {
             try
             {
                  var produtos = await _produtoPersist.GetAllProdutosByCodigoBarraAsync(codigoBarras);
                  if (produtos == null) return null;
 
-                 return produtos;
+                var produtosRetorno = _mapper.Map<ProdutoDto[]>(produtos);
+                
+                return produtosRetorno;
             }
             catch (Exception ex)
             {
@@ -114,14 +133,16 @@ namespace JitResidencial.Application
             }
         }
 
-        public async Task<Produto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto)
+        public async Task<ProdutoDto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto)
         {
             try
             {
                  var produtos = await _produtoPersist.GetAllProdutosByNomeProdutoAsync(nomeProduto);
                  if (produtos == null) return null;
 
-                 return produtos;
+                var produtosRetorno = _mapper.Map<ProdutoDto[]>(produtos);
+                
+                return produtosRetorno;
             }
             catch (Exception ex)
             {
@@ -130,14 +151,15 @@ namespace JitResidencial.Application
             }
         }
 
-        public async Task<Produto> GetProdutoByIdAsync(int produtoId)
+        public async Task<ProdutoDto> GetProdutoByIdAsync(int produtoId)
         {
             try
             {
-                var produtos = await _produtoPersist.GetProdutoByIdAsync(produtoId);
-                if (produtos == null) return null;
+                var produto = await _produtoPersist.GetProdutoByIdAsync(produtoId);
+                if (produto == null) return null;
 
-                return produtos;
+                var produtoRetorno = _mapper.Map<ProdutoDto>(produto);
+                return produtoRetorno;
             }
             catch (Exception ex)
             {

@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { ValidationFields } from '@app/helpers/validationFields';
 
 @Component({
-  selector: 'app-cadastro',
+  selector: 'app-usuario-cadastro',
   templateUrl: './usuario-cadastro.component.html',
   styleUrls: ['./usuario-cadastro.component.scss']
 })
-export class CadastroComponent implements OnInit {
+export class UsuarioCadastroComponent implements OnInit {
 
   form!: FormGroup;
 
@@ -60,7 +60,8 @@ export class CadastroComponent implements OnInit {
                             ]],
       }, formOptions);
   }
-  resetForm(): void {
+  resetForm(event: any): void {
+    event.preventDefault();
     this.form.reset();
    }
 }

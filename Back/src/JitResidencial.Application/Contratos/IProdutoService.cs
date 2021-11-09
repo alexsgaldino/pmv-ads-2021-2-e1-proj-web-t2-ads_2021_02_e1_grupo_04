@@ -1,17 +1,17 @@
 using System.Threading.Tasks;
-using JitResidencial.Domain;
+using JitResidencial.Application.Dtos;
 
 namespace JitResidencial.Application.Contratos
 {
     public interface IProdutoService
     {
-         Task<Produto> AddProdutos(Produto model);
-        Task<Produto> UpdateProduto(int produtoId, Produto model);
+         Task<ProdutoDto> AddProdutos(ProdutoDto model);
+        Task<ProdutoDto> UpdateProduto(int produtoId, ProdutoDto model);
         Task<bool> DeleteProduto(int produtoId);
         
-        Task<Produto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto);
-        Task<Produto[]> GetAllProdutosByCodigoBarrasAsync(string codigoBarras);
-        Task<Produto[]> GetAllProdutosAsync();
-        Task<Produto> GetProdutoByIdAsync(int produtoId);
+        Task<ProdutoDto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto);
+        Task<ProdutoDto[]> GetAllProdutosByCodigoBarrasAsync(string codigoBarras);
+        Task<ProdutoDto[]> GetAllProdutosAsync();
+        Task<ProdutoDto> GetProdutoByIdAsync(int produtoId);
     }
 }
