@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JitResidencial.Persistence
 {
-    public class EstoquePersist : IEstoquePersist
+    public class EstoquePersist : GlobalPersist, IEstoquePersist
     {
         private readonly JitResidencialContext _context;
-        public EstoquePersist(JitResidencialContext context)
+        public EstoquePersist(JitResidencialContext context) : base(context)
         {
             _context = context;
 

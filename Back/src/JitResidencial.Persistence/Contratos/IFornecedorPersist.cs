@@ -4,7 +4,7 @@ using JitResidencial.Domain;
 
 namespace JitResidencial.Persistence.Contratos
 {
-    public interface IFornecedorPersist
+    public interface IFornecedorPersist : IGlobalPersist
     {
         Task<Fornecedor[]> GetAllFornecedoresByNomeAsync(string nome);
         Task<Fornecedor[]> GetAllFornecedoresAsync();

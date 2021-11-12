@@ -8,10 +8,10 @@ using JitResidencial.Persistence.Contextos;
 
 namespace JitResidencial.Persistence
 {
-    public class ProdutoPersist : IProdutoPersist
+    public class ProdutoPersist : GlobalPersist, IProdutoPersist
     {
         private readonly JitResidencialContext _context;
-        public ProdutoPersist(JitResidencialContext context)
+        public ProdutoPersist(JitResidencialContext context) : base (context)
         {
             _context = context;
 

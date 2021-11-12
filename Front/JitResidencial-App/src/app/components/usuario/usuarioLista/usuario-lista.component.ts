@@ -5,8 +5,8 @@ import { NgxSpinnerService }          from "ngx-spinner";
 import { ToastContainerDirective, ToastrService }
                                       from "ngx-toastr";
 import { Router } from "@angular/router";
-import { Usuario } from "src/app/models/Usuario";
-import { UsuarioService } from "src/app/Services/usuario/usuario.service";
+import { User } from "@app/models/User";
+import { UserService } from "@app/Services/user/user.service";
 
 @Component ({
   selector: 'app-usuario-lista',
@@ -18,8 +18,8 @@ export class UsuarioListaComponent implements OnInit {
 
   @ViewChild(ToastContainerDirective) toastContainer?: ToastContainerDirective;
 
-  public usuarios: Usuario[] = [];
-  public usuariosFiltrados: Usuario[] = [];
+  public usuarios: User[] = [];
+  public usuariosFiltrados: User[] = [];
   private _filtroLista: string = '';
 
   public get filtroLista(): string {
@@ -31,7 +31,7 @@ export class UsuarioListaComponent implements OnInit {
     this.usuariosFiltrados = this._filtroLista ? this.filtrarUsuarios(this.filtroLista) : this.usuarios;
   }
 
-  public filtrarUsuarios(filtrarPor: string): Usuario[] {
+  public filtrarUsuarios(filtrarPor: string): User[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.usuarios.filter(
       (usuario: any) => usuario.primeiroNome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
@@ -42,7 +42,7 @@ export class UsuarioListaComponent implements OnInit {
       );
     }
 
-  constructor(private usuarioService: UsuarioService,
+  constructor(private userService: UserService,
               private modalServices: BsModalService,
               private toastr: ToastrService,
               private spinner: NgxSpinnerService,
@@ -56,8 +56,8 @@ export class UsuarioListaComponent implements OnInit {
   }
 
   public getUsuarios(): void {
-    this.usuarioService.getUsuarios().subscribe({
-      next: (usuarios: Usuario[]) => {
+    /*this.userService.getUsersByFirstName().subscribe({
+      next: (usuarios: User[]) => {
         this.usuarios = usuarios;
         this.usuariosFiltrados = this.usuarios;
       },
@@ -66,7 +66,7 @@ export class UsuarioListaComponent implements OnInit {
         this.toastr.error('Erro ao carregar os usurios', 'Erro!');
       },
       complete: () => this.spinner.hide()
-    });
+    });*/
   }
   openModal (template: TemplateRef<any>): void {
     this.modalRef = this.modalServices.show(template, {class: 'modal-sm'});

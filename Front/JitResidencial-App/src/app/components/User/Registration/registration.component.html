@@ -1,0 +1,118 @@
+<div class="row  ">
+  <!-- Cabeçalho de página comum para todas as páginas -->
+  <app-title [title]="'Conta'"
+           [iconClass]="'fas fa-user-check'"
+           [subtitle]="'by PUC-MINAS EAD 2021'"
+           [buttonListing]="true"
+           [action]="'Cadastro'">
+  </app-title>
+
+
+  <!-- Imagem da tela de cadastro -->
+  <div class="row ">
+    <div class="col-4">
+      <div class="d-none d-lg-block pt-3 float-start" >
+        <div div  class="text-center  ">
+         <img id="imageRegistration" class="img-fluid img-thumbnail" src="../../../../assets/Jit.png" alt="" >
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-0 ">
+
+      <!-- fomrulario de cadastro -->
+      <div class="card bg-light" >
+        <div class="card-header text-center bg-primary text-white p-4" >
+          <h4>Informe os dados abaixo para realização do cadastro:</h4>
+        </div>
+
+        <div class="card-body bg-ligth ">
+
+          <form ngClass="row " [formGroup]="registerForm">
+
+            <div class=" col-lg-4 col-sm-4 pt-2">
+              <label class="form-label">Primeiro Nome</label>
+              <input type="text" class="form-control" placeholder="" formControlName="firstName"
+                  [ngClass]="fieldValidator(f.firstName)">
+              <div  class="invalid-feedback">
+                {{ErrorMessageValidationField(f.firstName, "Primeiro Nome")}}
+              </div>
+            </div>
+
+            <div class="col-lg-8 col-sm-8 pt-2">
+              <label class="form-label">Sobrenome</label>
+              <input type="text" class="form-control" placeholder="" formControlName="lastName"
+                  [ngClass]="fieldValidator(f.lastName)">
+              <div class="invalid-feedback">
+                {{ErrorMessageValidationField(f.lastName, "Sobrenome")}}
+              </div>
+            </div>
+
+            <div class=" col-lg-4 col-sm-4 pt-2">
+             <label class="form-label" for="">Conta:</label>
+              <input class="form-control" type="text" placeholder="" formControlName="userName"
+                [ngClass]="fieldValidator(f.userName)">
+              <div class="invalid-feedback">
+               {{ErrorMessageValidationField(f.userName, "Conta")}}
+              </div>
+            </div>
+
+            <div div class="col pt-2">
+              <label class="form-label">Email:</label>
+              <input class="form-control" type="text" placeholder="" formControlName="email"
+                  [ngClass]="fieldValidator(f.email)"
+              >
+              <div class="invalid-feedback">
+                {{ErrorMessageValidationField(f.email, "E-mail")}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-8 col-sm-6 pt-2">
+                <label class="form-label" for="">Senha:</label>
+                <input class="form-control" type="password" placeholder="" formControlName="password"
+                    [ngClass]="fieldValidator(f.password)">
+                <div  class="invalid-feedback">
+                  {{ErrorMessageValidationField(f.password, "Senha")}}
+                </div>
+              </div>
+
+              <div class="col-lg-8 col-sm-6   pt-2 float-end">
+                <label class="form-label" for="">Confirmar Senha:</label>
+                <input class="form-control" type="password" placeholder="" formControlName="confirmPassword"
+                      [ngClass]="fieldValidator(f.confirmPassword)">
+                <div class="invalid-feedback">
+                  {{ErrorMessageValidationField(f.confirmPassword, "Confirmar Senha")}}
+                </div>
+              </div>
+            </div>
+         </form>
+        </div>
+
+      <div class="card-footer bg-dark text-white justify-content">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <a class="btn btn-link" [routerLink]="['/user/login']">
+              Já sou Cadastrado
+            </a>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <button button class="btn btn-outline-light float-end"
+                    [disabled]="!registerForm.valid"
+                    (click)="registrationUser()"
+            >
+              <b>Registrar</b>
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class="row p-2 bg-primary">
+  <div class="text-white ">
+  <p>Form value: {{registerForm.value | json}}</p>
+  <p>form status: {{registerForm.status | json}}</p>
+</div></div>-->
+
+

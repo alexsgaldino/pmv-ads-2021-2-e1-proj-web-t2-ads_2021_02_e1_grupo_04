@@ -26,6 +26,7 @@ export class ProdutoListaComponent implements OnInit {
   public produtos: Produto[] = [];
   public produtosFiltrados: Produto[] = [];
   private _filtroLista: string = '';
+  public produtoId!: number;
 
   public get filtroLista(): string {
     return this._filtroLista;
@@ -54,11 +55,11 @@ export class ProdutoListaComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.getProdutos();
+    this.carregarProdutos();
     this.toastr.overlayContainer = this.toastContainer;
   }
 
-  public getProdutos(): void {
+  public carregarProdutos(): void {
     this.produtoService.getProdutos().subscribe({
       next: (produtos: Produto[]) => {
         this.produtos = produtos;
@@ -71,16 +72,33 @@ export class ProdutoListaComponent implements OnInit {
       complete: () => this.spinner.hide()
     });
   }
-  openModal (template: TemplateRef<any>): void {
+  openModal (event: any, template: TemplateRef<any>, produtoId: number): void {
+    this.produtoId = produtoId;
+    event.stopPropagation();
     this.modalRef = this.modalServices.show(template, {class: 'modal-sm'});
   }
   confirm(): void {
     this.modalRef.hide();
-    this.toastr.success('Registro excluído', 'deletado');
+    this.spinner.show()
+
+    this.produtoService.deleteProduto(this.produtoId).subscribe(
+      (result: any) => {
+        if (result.message === 'Deletado') {
+          this.toastr.success('Registro excluído', 'deletado');
+          this.carregarProdutos();
+        }
+      },
+      (error: any) => {
+        console.error(error)
+        this.toastr.error(`Erro ao excluir o produto ${this.produtoId}`, 'Erro!')
+      },
+    ).add(() => this.spinner.hide());
   }
+
   decline(): void {
     this.modalRef.hide();
   }
+
   detalheProduto(id: number): void {
     this.router.navigate([`produto/detalhe/${id}`]);
   }

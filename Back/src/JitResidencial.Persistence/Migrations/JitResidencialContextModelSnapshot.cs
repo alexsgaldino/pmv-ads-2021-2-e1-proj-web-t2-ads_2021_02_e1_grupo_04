@@ -28,12 +28,7 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Categorias");
                 });
@@ -91,12 +86,7 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<int>("EstoqueDisponivel")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Estoques");
                 });
@@ -122,14 +112,9 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<string>("NomeFantasia")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ListaPrecoId");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Fornecedores");
                 });
@@ -151,6 +136,122 @@ namespace JitResidencial.Persistence.Migrations
                     b.ToTable("Grupos");
                 });
 
+            modelBuilder.Entity("JitResidencial.Domain.Identity.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("JitResidencial.Domain.Identity.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("JitResidencial.Domain.Identity.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("JitResidencial.Domain.ListaPreco", b =>
                 {
                     b.Property<int>("Id")
@@ -163,12 +264,7 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<int>("PrecoUnitario")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("ListasPrecos");
                 });
@@ -182,9 +278,6 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<DateTime?>("DataMovimento")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("QuantidadeEntrada")
                         .HasColumnType("INTEGER");
 
@@ -192,8 +285,6 @@ namespace JitResidencial.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Movimentos");
                 });
@@ -210,10 +301,10 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<string>("CodigoBarras")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DataAlteracao")
+                    b.Property<string>("DataAlteracao")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DataInclusao")
+                    b.Property<string>("DataInclusao")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DataValidade")
@@ -265,15 +356,10 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Unidade")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("UnidadesMedidas");
                 });
@@ -296,16 +382,10 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<int>("GrupoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PrimeiroNome")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("ProdutoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Senha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Sobrenome")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Telefone")
@@ -314,26 +394,101 @@ namespace JitResidencial.Persistence.Migrations
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("UsuarioLogin")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("JitResidencial.Domain.Categoria", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("Categorias")
-                        .HasForeignKey("ProdutoId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("JitResidencial.Domain.Estoque", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("Estoques")
-                        .HasForeignKey("ProdutoId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("JitResidencial.Domain.Fornecedor", b =>
@@ -341,24 +496,25 @@ namespace JitResidencial.Persistence.Migrations
                     b.HasOne("JitResidencial.Domain.ListaPreco", null)
                         .WithMany("Fornecedores")
                         .HasForeignKey("ListaPrecoId");
-
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("Fornecedores")
-                        .HasForeignKey("ProdutoId");
                 });
 
-            modelBuilder.Entity("JitResidencial.Domain.ListaPreco", b =>
+            modelBuilder.Entity("JitResidencial.Domain.Identity.UserRole", b =>
                 {
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("ListasPrecos")
-                        .HasForeignKey("ProdutoId");
-                });
+                    b.HasOne("JitResidencial.Domain.Identity.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("JitResidencial.Domain.Movimento", b =>
-                {
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("Movimentos")
-                        .HasForeignKey("ProdutoId");
+                    b.HasOne("JitResidencial.Domain.Identity.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("JitResidencial.Domain.Produto", b =>
@@ -368,11 +524,51 @@ namespace JitResidencial.Persistence.Migrations
                         .HasForeignKey("EnderecoId");
                 });
 
-            modelBuilder.Entity("JitResidencial.Domain.UnidadeMedida", b =>
+            modelBuilder.Entity("JitResidencial.Domain.Usuario", b =>
                 {
-                    b.HasOne("JitResidencial.Domain.Produto", null)
-                        .WithMany("UnidadesMedidas")
-                        .HasForeignKey("ProdutoId");
+                    b.HasOne("JitResidencial.Domain.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("JitResidencial.Domain.Identity.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("JitResidencial.Domain.Identity.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("JitResidencial.Domain.Identity.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("JitResidencial.Domain.Identity.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JitResidencial.Domain.Endereco", b =>
@@ -380,24 +576,19 @@ namespace JitResidencial.Persistence.Migrations
                     b.Navigation("Produtos");
                 });
 
+            modelBuilder.Entity("JitResidencial.Domain.Identity.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("JitResidencial.Domain.Identity.User", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
             modelBuilder.Entity("JitResidencial.Domain.ListaPreco", b =>
                 {
                     b.Navigation("Fornecedores");
-                });
-
-            modelBuilder.Entity("JitResidencial.Domain.Produto", b =>
-                {
-                    b.Navigation("Categorias");
-
-                    b.Navigation("Estoques");
-
-                    b.Navigation("Fornecedores");
-
-                    b.Navigation("ListasPrecos");
-
-                    b.Navigation("Movimentos");
-
-                    b.Navigation("UnidadesMedidas");
                 });
 #pragma warning restore 612, 618
         }

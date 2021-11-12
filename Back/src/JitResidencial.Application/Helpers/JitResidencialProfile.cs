@@ -1,6 +1,7 @@
 using JitResidencial.Domain;
 using JitResidencial.Application.Dtos;
 using AutoMapper;
+using JitResidencial.Domain.Identity;
 
 namespace JitResidencial.Application.Helpers
 {
@@ -9,7 +10,10 @@ namespace JitResidencial.Application.Helpers
         public JitResidencialProfile()
         {
             CreateMap<Produto, ProdutoDto>().ReverseMap();
-            CreateMap<Usuario, UsuarioDto>().ReverseMap();
+            
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserLoginDto>().ReverseMap();
+            CreateMap<User, UserUpdateDto>().ReverseMap();
         }
     }
 }

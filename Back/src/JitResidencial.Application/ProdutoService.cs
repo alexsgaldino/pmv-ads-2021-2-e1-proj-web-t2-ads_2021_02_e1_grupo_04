@@ -12,16 +12,14 @@ namespace JitResidencial.Application
 {
     public class ProdutoService : IProdutoService
     {
-        private readonly IGeralPersist _geralPersist;
+        private readonly IGlobalPersist _globalPersist;
         private readonly IProdutoPersist _produtoPersist;
 
         private readonly IMapper _mapper;
 
-        public ProdutoService(  IGeralPersist geralPersist, 
-                                IProdutoPersist produtoPersist,
+        public ProdutoService(  IProdutoPersist produtoPersist,
                                 IMapper mapper)
         {
-            _geralPersist = geralPersist;
             _produtoPersist = produtoPersist;
             _mapper = mapper;
    
@@ -31,8 +29,8 @@ namespace JitResidencial.Application
             try
             {
                  var produto = _mapper.Map<Produto>(model);
-                 _geralPersist.Add<Produto>(produto);
-                 if (await _geralPersist.SaveChangesAsync())
+                _produtoPersist.Add<Produto>(produto);
+                 if (await _produtoPersist.SaveChangesAsync())
                  {
                      var produtoRetorno = await _produtoPersist.GetProdutoByIdAsync(produto.Id);
                     return _mapper.Map<ProdutoDto>(produtoRetorno); 
@@ -55,8 +53,8 @@ namespace JitResidencial.Application
                     throw new Exception("Evento para deleção não foi encontrado");
                 }
 
-                _geralPersist.Delete<Produto>(produto);
-                return await _geralPersist.SaveChangesAsync();
+                _produtoPersist.Delete<Produto>(produto);
+                return await _produtoPersist.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -77,9 +75,9 @@ namespace JitResidencial.Application
                 
                 _mapper.Map(model, produto);
 
-                _geralPersist.Update<Produto>(produto);
+                _produtoPersist.Update<Produto>(produto);
                 
-                if (await _geralPersist.SaveChangesAsync())
+                if (await _produtoPersist.SaveChangesAsync())
                 {
                     var produtoRetorno =  await _produtoPersist.GetProdutoByIdAsync(produto.Id);
                     return _mapper.Map<ProdutoDto>(produtoRetorno);
@@ -167,7 +165,6 @@ namespace JitResidencial.Application
                 throw new Exception(ex.Message);
             }
         }
-
 
     }
 }

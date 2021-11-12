@@ -19,12 +19,12 @@ import { ProdutoComponent }
         from './components/produto/produto.component';
 import { UnidadeMedidaComponent }
         from './components/unidadeMedida/unidadeMedida.component';
-import { UsuarioCadastroComponent }
-        from './components/usuario/usuario-cadastro/usuario-cadastro.component';
+import { RegistrationComponent }
+        from './components/User/Registration/registration.component';
 import { LoginComponent }
-        from './components/usuario/usuario-login/usuario-login.component';
-import { UsuarioPerfilComponent }
-        from './components/usuario/usuario-perfil/usuario-perfil.component';
+        from './components/User/login/login.component';
+import { ProfileComponent }
+        from './components/User/Profile/profile.component';
 import { UsuarioComponent }
         from './components/usuario/usuario.component';
 import { UsuarioListaComponent }
@@ -35,14 +35,13 @@ const routes: Routes = [
   { path: 'usuario', redirectTo: 'usuario/lista' },
   { path: 'produto', redirectTo: 'produto/lista' },
   {
-    path: 'usuario', component: UsuarioComponent,
+    path: 'user', component: UsuarioComponent,
     children: [
-        { path: 'login', component: LoginComponent },
-        { path: 'perfil/:id', component: UsuarioListaComponent },
-        { path: 'perfil', component: UsuarioPerfilComponent},
-        { path: 'lista', component: UsuarioListaComponent },
-        { path: 'cadastro', component: UsuarioCadastroComponent },
-
+      { path: 'login', component: LoginComponent },
+      { path: 'profile', component: ProfileComponent},
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'perfil/:id', component: UsuarioListaComponent },
+      { path: 'lista', component: UsuarioListaComponent },
      ]
   },
   {

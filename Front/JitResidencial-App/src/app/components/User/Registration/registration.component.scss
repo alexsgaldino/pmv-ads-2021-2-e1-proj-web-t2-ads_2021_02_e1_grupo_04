@@ -1,0 +1,46 @@
+#imageRegistration {
+  margin-top: 15px;
+  width: 400px;
+  height: 450px;
+}
+.card {
+  margin-top: 15px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.form-check-label {
+  padding-left: 10px;
+}
+.row .card, .row .card-header
+{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.row .card, .row .card-footer
+{
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+@media screen and (max-width: 1199px)
+{
+  #imageRegistration {
+    margin-top: 30px;
+    width: 300px;
+    height: 350px;
+  }
+  .card
+  {
+    margin-top: 10px
+  }
+}
+@media screen and (max-width: 400px)
+{
+  #imageRegistration
+  {
+    margin-top: 10px;
+    width: 300px;
+    height: 370px;
+}
+}

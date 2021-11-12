@@ -1,7 +1,15 @@
+
 import { Component, OnInit }
         from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators }
         from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ValidationFields } from '@app/helpers/validationFields';
+import { Produto } from '@app/models/Produto';
+import { ProdutoService } from '@app/Services/produto/produto.service';
+import { BsLocaleService, DateFormatter } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-produto-detalhe',
@@ -10,21 +18,60 @@ import { FormBuilder, FormControl, FormGroup, Validators }
 })
 export class ProdutoDetalheComponent implements OnInit {
 
+  produto = {} as Produto;
   form!: FormGroup;
+  estadoSalvar = 'post';
 
   get f(): any {
     return this.form!.controls;
   }
 
-  constructor(private fb: FormBuilder) { }
+  get bsConfig(): any {
+    return { isAnimated: true,
+      adaptivePosition: true,
+      dateInputFormat: 'DD/MM/YYYY hh:mm',
+      containerClass: 'theme-default'
+    };
+  }
 
+  constructor(private fb: FormBuilder,
+              private localeServive: BsLocaleService,
+              private router: ActivatedRoute,
+              private produtoService: ProdutoService,
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService)
+  {
+    this.localeServive.use('pt-br')
+  }
+
+  public carregarProduto(): void {
+    const produtoIdParam = this.router.snapshot.paramMap.get('id')
+
+    if (produtoIdParam !== null) {
+      this.spinner.show();
+
+      this.estadoSalvar = 'put';
+      this.produtoService.getProdutosById(+produtoIdParam).subscribe(
+        (produto: Produto) => {
+          this.produto = {... produto};
+          this.form.patchValue(this.produto);
+        },
+        (error: any) => {
+          this.toastr.error('Houve uma falha ao carregar o produto.', 'erro!')
+          console.error(error);
+        }
+      ).add(() => this.spinner.hide());
+    }
+  }
   ngOnInit() {
+    this.carregarProduto();
     this.validation();
   }
 
   public validation(): void {
-    this.form! = this.fb.group({
-      codigoBarras: ["", [
+      this.form! = this.fb.group({
+        id: ["", ],
+        codigoBarras: ["", [
                           Validators.required,
                           Validators.minLength(15),
                           Validators.maxLength(15)
@@ -44,12 +91,45 @@ export class ProdutoDetalheComponent implements OnInit {
                     Validators.maxLength(15)
                    ]],
       dataValidade: ["", [
-                                    Validators.required
-                                   ]],
+                          Validators.required
+        ]],
+        dataAlteracao: ["",],
+      dataInclusao: ["",]
       });
   }
   resetForm(event: any): void {
     event.preventDefault();
     this.form.reset();
    }
+  cssValidator(campoForm: FormControl): any {
+    return ValidationFields.VerifyErrorsTouched(campoForm);
+  }
+  ErrorMessageValidationField(fieldName: FormControl, fieldElement: string): any {
+    return ValidationFields.ReturnMessageGroup(fieldName, fieldElement);
+  }
+  public salvarProduto(): void {
+    this.spinner.show();
+
+    var data  = new Date().toLocaleString("pt-br");
+
+    if (this.form.valid) {
+      this.produto = (
+        this.estadoSalvar === 'post')
+        ? { ... this.form.value }
+        : { id: this.produto.id, ... this.form.value };
+      this.produto.dataAlteracao = data;
+      if (this.estadoSalvar === 'post') {
+        this.produto.dataInclusao = data;
+      }
+
+      this.produtoService[this.estadoSalvar](this.produto).subscribe(
+        () => this.toastr.success("Produto atualizado com sucesso", "Sucesso!"),
+        (error: any) => {
+          console.error(error);
+          this.toastr.error("Erro ao salvar produto", "Erro!");
+        }
+      ).add(() => this.spinner.hide());
+    }
+
+  }
 }

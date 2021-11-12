@@ -7,26 +7,23 @@
 
 <div class="container">
     <form Class="row g-3" [formGroup]="form!">
- <!--     <p>Form value: {{form!.value | json}}</p>
-      <p>form status: {{form!.status | json}}</p>-->
+      <p>Form value: {{form!.value | json}}</p>
+      <p>form status: {{form!.status | json}}</p>
+
       <div class=" col-lg-2 col-sm-4 col-xs-8">
         <label class="form-label">Código do Produto</label>
-        <input type="text" class="form-control" disabled="" >
+        <input type="text"
+              class="form-control"
+              >
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
         <label class="form-label">Código de Barras</label>
         <input type="text"
               class="form-control"
               formControlName="codigoBarras"
-              [ngClass]="{'is-invalid': f.codigoBarras.errors && f.codigoBarras.touched }">
-        <div *ngIf="f.codigoBarras.errors?.required" class="invalid-feedback">
-          Campo obrigatório!
-        </div>
-        <div *ngIf="f.codigoBarras.errors.minlength" class="invalid-feedback">
-          Código de Barras deve conter no mínimo 15 carctesres
-        </div>
-        <div *ngIf="f.codigoBarras.errors.maxlength" class="invalid-feedback">
-          Código de Barras deve conter no máximo 15 carctesres
+              [ngClass]="cssValidator(f.codigoBarras)">
+        <div class="invalid-feedback">
+          {{ErrorMessageValidationField(f.codigoBarras, "Código de Barras")}}
         </div>
       </div>
       <div class=" col-lg-6 col-sm-8 col-xs-8">
@@ -34,15 +31,9 @@
         <input type="text"
                class="form-control is-invalid"
                formControlName="nomeProduto"
-               [ngClass]="{'is-invalid': f.nomeProduto.errors && f.nomeProduto.touched }">
-        <div *ngIf="f.nomeProduto.errors.required" class="invalid-feedback">
-          Campo obrigatório!
-        </div>
-        <div *ngIf="f.nomeProduto.errors?.minlength" class="invalid-feedback">
-          Nome Produto deve conter no mínimo 04 carctesres
-        </div>
-        <div *ngIf="f.nomeProduto.errors?.maxlength" class="invalid-feedback">
-          Nome Produto deve conter no máximo 50 carctesres
+               [ngClass]="cssValidator(f.nomeProduto)">
+        <div class="invalid-feedback">
+          {{ErrorMessageValidationField(f.nomeProduto, "Nome Produto")}}
         </div>
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
@@ -50,12 +41,9 @@
         <input type="number"
                class="form-control is-invalid"
                formControlName="quantidade"
-               [ngClass]="{'is-invalid': f.quantidade.errors && f.quantidade.touched }">
-        <div *ngIf="f.quantidade.errors?.required" class="invalid-feedback">
-          Campo obrigatório!
-        </div>
-        <div *ngIf="f.quantidade.errors?.max" class="invalid-feedback">
-          Quantidade inválida
+               [ngClass]="cssValidator(f.quantidade)">
+        <div  class="invalid-feedback">
+          {{ErrorMessageValidationField(f.quantidade, "Quantidade")}}
         </div>
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
@@ -63,15 +51,9 @@
         <input type="text"
                class="form-control is-invalid"
                formControlName="volume"
-               [ngClass]="{'is-invalid': f.volume.errors && f.volume.touched }">
-        <div *ngIf="f.volume.errors?.required" class="invalid-feedback">
-          Campo obrigatório!
-        </div>
-        <div *ngIf="f.volume.errors?.minlength" class="invalid-feedback">
-          Volume deve conter no mínimo 04 carctesres
-        </div>
-        <div *ngIf="f.volume.errors.maxlength" class="invalid-feedback">
-          Volume deve conter no máximo 15 carctesres
+               [ngClass]="cssValidator(f.volume)">
+        <div class="invalid-feedback">
+          {{ErrorMessageValidationField(f.volume,  "Volume")}}
         </div>
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
@@ -79,19 +61,21 @@
         <input type="text"
                class="form-control is-invalid"
                formControlName="dataValidade"
-               placeholder="dd/mm/aaaa"
-               [ngClass]="{'is-invalid': f.dataValidade.errors && f.dataValidade.touched }">
-        <div *ngIf="f.dataValidade.errors?.required" class="invalid-feedback">
-          Campo obrigatório
+               placeholder=""
+               bsDatepicker
+               [bsConfig]="bsConfig"
+               [ngClass]="cssValidator(f.dataValidade)">
+        <div class="invalid-feedback">
+          {{ErrorMessageValidationField(f.dataValidade,  "Data Validade")}}
         </div>
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
         <label class="form-label">Data Inclusão</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="dataInclusao">
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
         <label class="form-label">Última Atualização</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="dataAlteracao" >
       </div>
       <div class=" col-lg-2 col-sm-4 col-xs-8">
         <label class="form-label">Unid. Medida</label>
@@ -135,7 +119,7 @@
           <button class="btn btn-danger mr-auto border" (click)="resetForm($event)">
             Cancelar Alteração
           </button>
-          <button class="btn btn-outline-light" [disabled]="!form!.valid">
+          <button class="btn btn-outline-light" [disabled]="!form!.valid" (click)="salvarProduto()">
             <span class=" mr-1"></span>
               Salvar Evento
           </button>

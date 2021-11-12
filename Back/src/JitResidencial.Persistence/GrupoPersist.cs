@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JitResidencial.Persistence
 {
-    public class GrupoPersist : IGrupoPersist
+    public class GrupoPersist : GlobalPersist, IGrupoPersist
     {
         private readonly JitResidencialContext _context;
-        public GrupoPersist(JitResidencialContext context)
+        public GrupoPersist(JitResidencialContext context) : base(context)
         {
             _context = context;
         }

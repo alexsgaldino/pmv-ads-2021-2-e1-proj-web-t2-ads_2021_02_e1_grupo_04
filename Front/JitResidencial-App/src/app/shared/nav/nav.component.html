@@ -1,71 +1,92 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar  navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink='home'>J.I.T. Residencial</a>
-    <button class="navbar-toggler"
-        type="button"
-        (click)="isCollapsed = !isCollapsed"
-        [attr.aria-expanded]="!isCollapsed"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarColor02"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="navbar-toggler-icon"></i>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor02" [collapse]="isCollapsed" [isAnimated]="true">
-      <ul class="navbar-nav me-auto">
+
+    <div
+      class="collapse navbar-collapse"
+      id="navbarColor01"
+      [collapse]="isCollapsed" [isAnimated]="true">
+      <ul class="navbar-nav me-auto mb-0 mg-lg-0">
         <li class="nav-item ">
-          <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']" routerLink="/produto/detalhe">Produto
-             <span class="visually-hidden">(current)</span>
+          <a  [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']"
+              routerLink="/produto/detalhe">Produto
           </a>
       </li>
         <li class="nav-item">
-          <a  [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']"
-            href="#">Cadastro</a>
+          <a  [ngClass]="[disableMenu()
+                         ? 'nav-link disabled'
+                         : 'nav-link']"
+              href="#">
+              Cadastro
+          </a>
         </li>
         <li class="nav-item">
-          <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']" href="#">Entrar</a>
+          <a [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']"
+              href="#">Entrar</a>
         </li>
         <li class="nav-item">
-           <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']">Produtos</a>
+           <a [ngClass]="[disableMenu()
+                         ? 'nav-link disabled'
+                         : 'nav-link']">
+              Produtos
+           </a>
         </li>
         <li class="nav-item">
-          <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']">Estoque</a>
+          <a [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']">
+              Estoque
+          </a>
         </li>
         <li class="nav-item">
-          <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']">Categorias</a>
-        </li>
-        <li class="nav-item">
-          <a [ngClass]="[disableMenu() ? 'nav-link disabled' : 'nav-link active']">Grupos</a>
+          <a [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']">
+              Categorias
+          </a>
         </li>
       </ul>
-      <ul [ngClass]="[disableMenu() ? 'nav-link disabled' : 'navbar-nav']" >
+      <ul class="nav-bar">
         <li class="nav-item dropdown" dropdown>
-          <a dropdownToggle class="nav-link dropdown-toggle"
-             id="navbarDropdownMenuLink"
-             data-bs-toggle="dropdown"
-             role="button"
-             aria-haspopup="true"
-             aria-expanded="false">
-          Vinícius
+          <a dropdownToggle
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']"
+          >
+            Vinicius
           </a>
-          <div *dropdownMenu
-               class="dropdown-menu"
-               aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink='/usuario/perfil'>
-            Perfil
+        <div *dropdownMenu
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdownMenuLink">
+          <a Class="dropdown-item"
+              routerLink='/user/profile'
+              [ngClass]="[disableMenu()
+                        ? 'nav-link disabled'
+                        : 'nav-link ']">
+            Profile
           </a>
-          <a class="dropdown-item" routerLink='usuario/login'>
-            login
-          </a>
-          <div role="separator" class="dropdown-divider"></div>
+          <div role="separator"
+              class="divider"></div>
           <a class="dropdown-item" href="#">
             Sair
           </a>
-        </div>
-      </li>
-    </ul>
-   </div>
-   </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
-<!-- -->

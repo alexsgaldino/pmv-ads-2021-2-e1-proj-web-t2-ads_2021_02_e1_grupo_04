@@ -4,7 +4,7 @@ using JitResidencial.Domain;
 
 namespace JitResidencial.Persistence.Contratos
 {
-    public interface IProdutoPersist
+    public interface IProdutoPersist : IGlobalPersist
     {
         Task<Produto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto);
         Task<Produto[]> GetAllProdutosByCodigoBarraAsync(string codigoBarras);

@@ -5,7 +5,7 @@ namespace JitResidencial.Application.Contratos
 {
     public interface IProdutoService
     {
-         Task<ProdutoDto> AddProdutos(ProdutoDto model);
+        Task<ProdutoDto> AddProdutos(ProdutoDto model);
         Task<ProdutoDto> UpdateProduto(int produtoId, ProdutoDto model);
         Task<bool> DeleteProduto(int produtoId);
         

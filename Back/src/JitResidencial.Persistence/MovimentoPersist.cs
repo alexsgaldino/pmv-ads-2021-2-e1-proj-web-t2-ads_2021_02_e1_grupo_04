@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JitResidencial.Persistence
 {
-    public class MovimentoPersist : IMovimentoPersist
+    public class MovimentoPersist : GlobalPersist, IMovimentoPersist
     {
         private readonly JitResidencialContext _context;
-        public MovimentoPersist(JitResidencialContext context)
+        public MovimentoPersist(JitResidencialContext context) : base(context)
         {
             _context = context;
 

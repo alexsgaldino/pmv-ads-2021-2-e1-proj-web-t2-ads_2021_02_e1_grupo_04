@@ -57,7 +57,7 @@
                 <td class="d-none d-md-table-cell" >{{produto.dataValidade | DateTimeFormatPipe}}</td>
                 <td>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-danger "  tooltip="Excluir" (click)="openModal(template)">
+                    <button type="button" class="btn btn-danger "  tooltip="Excluir" (click)="openModal($event, template, produto.id)">
                     <i class="fa fa-trash"></i>
                     </button>
                   </div>
@@ -101,7 +101,7 @@
 
 <ng-template #template>
   <div class="modal-body modal-backdrop-bg text-center">
-    <p>Confirma a exclusão do produto?</p>
+    <p>Confirma a exclusão do produto {{this.produtoId}} ?</p>
     <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
   </div>

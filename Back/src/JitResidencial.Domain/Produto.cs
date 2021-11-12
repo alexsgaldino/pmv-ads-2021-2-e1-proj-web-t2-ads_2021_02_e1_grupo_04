@@ -11,9 +11,9 @@ namespace JitResidencial.Domain
         public string NomeProduto { get; set; }
         public int Quantidade { get; set; } 
         public string Volume { get; set; }
-        public DateTime? DataValidade { get; set; }
-        public DateTime? DataInclusao { get; set; }
-        public DateTime? DataAlteracao { get; set; }
+        public string DataValidade { get; set; }
+        public string DataInclusao { get; set; }
+        public string DataAlteracao { get; set; }
         public int UnidadeMedidaId {get; set;}
         public int CategoriaId  {get; set;}
         public int MovimentoId { get; set; }

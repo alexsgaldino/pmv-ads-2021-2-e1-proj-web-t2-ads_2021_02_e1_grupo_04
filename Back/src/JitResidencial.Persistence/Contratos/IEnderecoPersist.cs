@@ -4,7 +4,7 @@ using JitResidencial.Domain;
 
 namespace JitResidencial.Persistence.Contratos
 {
-    public interface IEnderecoPersist
+    public interface IEnderecoPersist : IGlobalPersist
     {
         Task<Endereco[]> GetAllEnderecosByRuaAsync(string rua);
         Task<Endereco[]> GetAllEnderecosByBairroAsync(string bairro);

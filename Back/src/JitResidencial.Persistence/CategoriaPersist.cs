@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JitResidencial.Persistence
 {
-    public class CategoriaPersist : ICategoriaPersist
+    public class CategoriaPersist : GlobalPersist, ICategoriaPersist
     {
         private readonly JitResidencialContext _context;
-        public CategoriaPersist(JitResidencialContext context)
+        public CategoriaPersist(JitResidencialContext context) : base(context)
         {
             _context = context;
 

@@ -7,8 +7,8 @@ export interface Produto {
  quantidade:  number;
  volume:  string;
  dataValidade:  string;
- dataInclusao?:  Date;
- dataAlteracao?:  Date;
+ dataInclusao:  string;
+ dataAlteracao:  string;
  unidadeMedidaId: number;
  categoriaId: number;
  movimentoId: number;

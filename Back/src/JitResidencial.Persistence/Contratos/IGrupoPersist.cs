@@ -4,7 +4,7 @@ using JitResidencial.Domain;
 
 namespace JitResidencial.Persistence.Contratos
 {
-    public interface IGrupoPersist
+    public interface IGrupoPersist : IGlobalPersist
     {
         Task<Grupo[]> GetAllGruposByNomeGrupoAsync(string nomeGrupo);
         Task<Grupo[]> GetAllGruposAsync();

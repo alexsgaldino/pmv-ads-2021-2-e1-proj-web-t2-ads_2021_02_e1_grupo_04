@@ -4,7 +4,7 @@ using JitResidencial.Domain;
 
 namespace JitResidencial.Persistence.Contratos
 {
-    public interface IEstoquePersist
+    public interface IEstoquePersist : IGlobalPersist
     {
         Task<Estoque> GetEstoqueByIdAsync(int estoqueId);
 

@@ -13,6 +13,8 @@ import { HttpClientModule }
         from '@angular/common/http';
 
 /* ---------------------- BOOTSTRAP IMPORTS ---------------------- */
+import {BsDatepickerModule}
+        from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule }
         from 'ngx-bootstrap/dropdown';
 import { CollapseModule }
@@ -41,6 +43,7 @@ import { ProdutoService }
         from './Services/produto/produto.service';
 
 /* ---------------------- COMPONENTS IMPORTS ---------------------- */
+import { LoginComponent }  from './components/User/login/login.component';
 import { ProdutoDetalheComponent } from './components/produto/produto-detalhe/produto-detalhe.component';
 
 import { CategoriaComponent }     from './components/categoria/categoria.component';
@@ -53,19 +56,28 @@ import { HomeComponent }          from './components/home/home.component';
 import { ListaPrecoComponent }    from './components/listaPreco/listaPreco.component';
 import { NavComponent }           from './shared/nav/nav.component';
 import { ProdutoComponent }       from './components/produto/produto.component';
-import { TituloComponent }        from './shared/titulo/titulo.component';
+import { TitleComponent }        from './shared/title/title.component';
 import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida.component';
 import { UsuarioComponent }       from './components/usuario/usuario.component';
 import { ProdutoListaComponent }  from './components/produto/produto-lista/produto-lista.component';
-import { LoginComponent }         from './components/usuario/usuario-login/usuario-login.component';
-import { UsuarioCadastroComponent }
-                                  from './components/usuario/usuario-cadastro/usuario-cadastro.component';
-import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
+import { RegistrationComponent }
+                                  from './components/User/Registration/registration.component';
+import { ProfileComponent } from './components/User/Profile/profile.component';
 import { UsuarioListaComponent }  from './components/usuario/usuarioLista/usuario-lista.component';
-import { UsuarioService }         from './Services/usuario/usuario.service';
+import { UserService }         from './Services/user/user.service';
+import { defineLocale }           from 'ngx-bootstrap/chronos';
+import { ptBrLocale }             from 'ngx-bootstrap/locale';
+
+defineLocale('pt-br', ptBrLocale);
 @NgModule({
   declarations: [
     AppComponent,
+
+    LoginComponent,
+    ProfileComponent,
+    RegistrationComponent,
+    TitleComponent,
+
     CategoriaComponent,
     DateTimeFormatPipe,
     EnderecoComponent,
@@ -77,20 +89,21 @@ import { UsuarioService }         from './Services/usuario/usuario.service';
     ListaPrecoComponent,
     NavComponent,
     ProdutoComponent,
-    TituloComponent,
-    UnidadeMedidaComponent,
-    UsuarioComponent,
     ProdutoDetalheComponent,
     ProdutoListaComponent,
-    LoginComponent,
-    UsuarioCadastroComponent,
-    UsuarioPerfilComponent,
+
+    UnidadeMedidaComponent,
+    UsuarioComponent,
+
     UsuarioListaComponent,
+
+
    ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     CommonModule,
@@ -108,7 +121,7 @@ import { UsuarioService }         from './Services/usuario/usuario.service';
     }),
     TooltipModule.forRoot(),
   ],
-  providers: [ProdutoService, UsuarioService],
+  providers: [ProdutoService, UserService],
   bootstrap: [AppComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
