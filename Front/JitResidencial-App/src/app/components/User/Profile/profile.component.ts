@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationFields } from '@app/helpers/validationFields';
+import { ValidarCampos } from '@app/helpers/ValidarCampos';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   }
   public validation(): void {
     const formOptions: AbstractControlOptions = {
-      validators: ValidationFields.MustMatch('senha', 'confirmarSenha')
+      validators: ValidarCampos.comparaSenha('senha', 'confirmarSenha')
     };
 
     this.form! = this.fb.group({

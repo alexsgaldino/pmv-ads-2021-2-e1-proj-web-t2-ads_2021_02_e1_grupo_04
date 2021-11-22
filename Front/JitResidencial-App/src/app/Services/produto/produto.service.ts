@@ -1,16 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators'
 
-import { Produto } from '@app/models/Produto';
+import { Produto } from '@app/models/Produtct';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class ProdutoService {
 
   baseURL = ' https://localhost:5001/api/produtos';
 
+//  baseURL = `${environment.apiURL}api/produtos`
   constructor(private http: HttpClient) {
 
   }

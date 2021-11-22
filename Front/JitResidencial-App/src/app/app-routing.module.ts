@@ -19,27 +19,28 @@ import { ProdutoComponent }
         from './components/produto/produto.component';
 import { UnidadeMedidaComponent }
         from './components/unidadeMedida/unidadeMedida.component';
-import { RegistrationComponent }
-        from './components/User/Registration/registration.component';
+import { CadastroComponent }
+        from './components/conta/cadastro/cadastro.component';
 import { LoginComponent }
-        from './components/User/login/login.component';
+        from './components/conta/login/login.component';
 import { ProfileComponent }
         from './components/User/Profile/profile.component';
-import { UsuarioComponent }
-        from './components/usuario/usuario.component';
+import { ContaComponent }
+        from './components/conta/conta.component';
 import { UsuarioListaComponent }
         from './components/usuario/usuarioLista/usuario-lista.component';
 
 
 const routes: Routes = [
-  { path: 'usuario', redirectTo: 'usuario/lista' },
   { path: 'produto', redirectTo: 'produto/lista' },
+  { path: 'home', redirectTo: 'home' },
+  { path: 'conta', redirectTo: 'home' },
   {
-    path: 'user', component: UsuarioComponent,
+    path: 'conta', component: ContaComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'profile', component: ProfileComponent},
-      { path: 'registration', component: RegistrationComponent },
+      { path: 'cadastro', component: CadastroComponent },
       { path: 'perfil/:id', component: UsuarioListaComponent },
       { path: 'lista', component: UsuarioListaComponent },
      ]

@@ -1,4 +1,4 @@
-import { Produto } from "./Produto";
+import { Produto } from "./Produtct";
 
 export interface Endereco {
   id: number;

@@ -7,7 +7,7 @@ import { NgxSpinnerService }
 import { ToastContainerDirective, ToastrService }
         from "ngx-toastr";
 import { Produto }
-        from "src/app/models/Produto";
+        from "@app/models/Produtct";
 import { ProdutoService }
         from "src/app/Services/produto/produto.service";
 import { Router }

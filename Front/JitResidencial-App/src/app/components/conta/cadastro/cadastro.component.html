@@ -1,68 +1,61 @@
-<div class="row  ">
-  <!-- Cabeçalho de página comum para todas as páginas -->
-  <app-title [title]="'Conta'"
-           [iconClass]="'fas fa-user-check'"
-           [subtitle]="'by PUC-MINAS EAD 2021'"
-           [buttonListing]="true"
-           [action]="'Cadastro'">
-  </app-title>
-
-
   <!-- Imagem da tela de cadastro -->
-  <div class="row ">
-    <div class="col-4">
-      <div class="d-none d-lg-block pt-3 float-start" >
+  <div class="row pt-5">
+    <div class="col-4 ms-5 me-5 d-flex justify-content-center align-items-center pt-5" >
+      <div class="d-none d-sm-block float-start" >
         <div div  class="text-center  ">
          <img id="imageRegistration" class="img-fluid img-thumbnail" src="../../../../assets/Jit.png" alt="" >
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-0 ">
+
+    <div class="col-8 col-sm-6 pt-5">
 
       <!-- fomrulario de cadastro -->
-      <div class="card bg-light" >
+      <div class="card bg-light " >
         <div class="card-header text-center bg-primary text-white p-4" >
           <h4>Informe os dados abaixo para realização do cadastro:</h4>
         </div>
 
         <div class="card-body bg-ligth ">
 
-          <form ngClass="row " [formGroup]="registerForm">
+          <form ngClass="row "
+                [formGroup]="cadastroForm"
+                (ngSubmit)="cadastrarConta()">
 
             <div class=" col-lg-4 col-sm-4 pt-2">
               <label class="form-label">Primeiro Nome</label>
-              <input type="text" class="form-control" placeholder="" formControlName="firstName"
-                  [ngClass]="fieldValidator(f.firstName)">
+              <input type="text" class="form-control" placeholder="" formControlName="primeiroNome"
+                  [ngClass]="validarCampo(controlsAtivo.primeiroNome)">
               <div  class="invalid-feedback">
-                {{ErrorMessageValidationField(f.firstName, "Primeiro Nome")}}
+                {{retornarValidacao(controlsAtivo.primeiroNome, "Primeiro Nome")}}
               </div>
             </div>
 
             <div class="col-lg-8 col-sm-8 pt-2">
               <label class="form-label">Sobrenome</label>
-              <input type="text" class="form-control" placeholder="" formControlName="lastName"
-                  [ngClass]="fieldValidator(f.lastName)">
+              <input type="text" class="form-control" placeholder="" formControlName="sobrenome"
+                  [ngClass]="validarCampo(controlsAtivo.sobrenome)">
               <div class="invalid-feedback">
-                {{ErrorMessageValidationField(f.lastName, "Sobrenome")}}
+                {{retornarValidacao(controlsAtivo.sobrenome, "Sobrenome")}}
               </div>
             </div>
 
             <div class=" col-lg-4 col-sm-4 pt-2">
              <label class="form-label" for="">Conta:</label>
               <input class="form-control" type="text" placeholder="" formControlName="userName"
-                [ngClass]="fieldValidator(f.userName)">
+                [ngClass]="validarCampo(controlsAtivo.userName)">
               <div class="invalid-feedback">
-               {{ErrorMessageValidationField(f.userName, "Conta")}}
+               {{retornarValidacao(controlsAtivo.userName, "Conta")}}
               </div>
             </div>
 
             <div div class="col pt-2">
               <label class="form-label">Email:</label>
               <input class="form-control" type="text" placeholder="" formControlName="email"
-                  [ngClass]="fieldValidator(f.email)"
+                  [ngClass]="validarCampo(controlsAtivo.email)"
               >
               <div class="invalid-feedback">
-                {{ErrorMessageValidationField(f.email, "E-mail")}}
+                {{retornarValidacao(controlsAtivo.email, "E-mail")}}
               </div>
             </div>
 
@@ -70,18 +63,18 @@
               <div class="col-lg-8 col-sm-6 pt-2">
                 <label class="form-label" for="">Senha:</label>
                 <input class="form-control" type="password" placeholder="" formControlName="password"
-                    [ngClass]="fieldValidator(f.password)">
+                    [ngClass]="validarCampo(controlsAtivo.password)">
                 <div  class="invalid-feedback">
-                  {{ErrorMessageValidationField(f.password, "Senha")}}
+                  {{retornarValidacao(controlsAtivo.password, "Senha")}}
                 </div>
               </div>
 
               <div class="col-lg-8 col-sm-6   pt-2 float-end">
                 <label class="form-label" for="">Confirmar Senha:</label>
                 <input class="form-control" type="password" placeholder="" formControlName="confirmPassword"
-                      [ngClass]="fieldValidator(f.confirmPassword)">
+                      [ngClass]="validarCampo(controlsAtivo.confirmPassword)">
                 <div class="invalid-feedback">
-                  {{ErrorMessageValidationField(f.confirmPassword, "Confirmar Senha")}}
+                  {{retornarValidacao(controlsAtivo.confirmPassword, "Confirmar Senha")}}
                 </div>
               </div>
             </div>
@@ -91,16 +84,17 @@
       <div class="card-footer bg-dark text-white justify-content">
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            <a class="btn btn-link" [routerLink]="['/user/login']">
+            <a class="btn btn-link" [routerLink]="['/conta/login']">
               Já sou Cadastrado
             </a>
           </div>
           <div class="col-lg-6 col-sm-12">
             <button button class="btn btn-outline-light float-end"
-                    [disabled]="!registerForm.valid"
-                    (click)="registrationUser()"
+                    type="submit"
+                    [disabled]="!cadastroForm.valid"
+                    (click)="cadastrarConta()"
             >
-              <b>Registrar</b>
+              <b>Cadastrar</b>
             </button>
             </div>
           </div>
@@ -108,11 +102,10 @@
       </div>
     </div>
   </div>
-</div>
-<!--<div class="row p-2 bg-primary">
+<!-- <div class="row p-2 bg-primary">
   <div class="text-white ">
-  <p>Form value: {{registerForm.value | json}}</p>
-  <p>form status: {{registerForm.status | json}}</p>
-</div></div>-->
+  <p>Form value: {{cadastroForm.value | json}}</p>
+  <p>form status: {{cadastroForm.status | json}}</p>
+</div></div> -->
 
 

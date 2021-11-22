@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContaService } from '@app/Services/conta/conta.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,9 +10,15 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(public contaService: ContaService,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout(): void {
+    this.contaService.logout();
+    this.router.navigateByUrl('/home');
   }
 
   disableMenu(): boolean {

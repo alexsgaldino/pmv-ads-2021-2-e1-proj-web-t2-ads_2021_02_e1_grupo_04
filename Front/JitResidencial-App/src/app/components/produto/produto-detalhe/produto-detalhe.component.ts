@@ -4,8 +4,8 @@ import { Component, OnInit }
 import { FormBuilder, FormControl, FormGroup, Validators }
         from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ValidationFields } from '@app/helpers/validationFields';
-import { Produto } from '@app/models/Produto';
+import { ValidarCampos } from '@app/helpers/ValidarCampos';
+import { Produto } from '@app/models/Produtct';
 import { ProdutoService } from '@app/Services/produto/produto.service';
 import { BsLocaleService, DateFormatter } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -102,10 +102,10 @@ export class ProdutoDetalheComponent implements OnInit {
     this.form.reset();
    }
   cssValidator(campoForm: FormControl): any {
-    return ValidationFields.VerifyErrorsTouched(campoForm);
+    return ValidarCampos.verificarErroCampo(campoForm);
   }
   ErrorMessageValidationField(fieldName: FormControl, fieldElement: string): any {
-    return ValidationFields.ReturnMessageGroup(fieldName, fieldElement);
+    return ValidarCampos.retornarMensagemErro(fieldName, fieldElement);
   }
   public salvarProduto(): void {
     this.spinner.show();

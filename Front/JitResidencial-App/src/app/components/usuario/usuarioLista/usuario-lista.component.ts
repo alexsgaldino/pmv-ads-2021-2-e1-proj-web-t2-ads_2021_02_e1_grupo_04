@@ -5,8 +5,8 @@ import { NgxSpinnerService }          from "ngx-spinner";
 import { ToastContainerDirective, ToastrService }
                                       from "ngx-toastr";
 import { Router } from "@angular/router";
-import { User } from "@app/models/User";
-import { UserService } from "@app/Services/user/user.service";
+import { Conta } from "@app/models/Identity/Conta";
+import { ContaService } from "@app/Services/conta/conta.service";
 
 @Component ({
   selector: 'app-usuario-lista',
@@ -18,8 +18,8 @@ export class UsuarioListaComponent implements OnInit {
 
   @ViewChild(ToastContainerDirective) toastContainer?: ToastContainerDirective;
 
-  public usuarios: User[] = [];
-  public usuariosFiltrados: User[] = [];
+  public usuarios: Conta[] = [];
+  public usuariosFiltrados: Conta[] = [];
   private _filtroLista: string = '';
 
   public get filtroLista(): string {
@@ -31,7 +31,7 @@ export class UsuarioListaComponent implements OnInit {
     this.usuariosFiltrados = this._filtroLista ? this.filtrarUsuarios(this.filtroLista) : this.usuarios;
   }
 
-  public filtrarUsuarios(filtrarPor: string): User[] {
+  public filtrarUsuarios(filtrarPor: string): Conta[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.usuarios.filter(
       (usuario: any) => usuario.primeiroNome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
@@ -42,7 +42,7 @@ export class UsuarioListaComponent implements OnInit {
       );
     }
 
-  constructor(private userService: UserService,
+  constructor(private ContaService: ContaService,
               private modalServices: BsModalService,
               private toastr: ToastrService,
               private spinner: NgxSpinnerService,
@@ -56,8 +56,8 @@ export class UsuarioListaComponent implements OnInit {
   }
 
   public getUsuarios(): void {
-    /*this.userService.getUsersByFirstName().subscribe({
-      next: (usuarios: User[]) => {
+    /*this.ContaService.getContasByFirstName().subscribe({
+      next: (usuarios: Conta[]) => {
         this.usuarios = usuarios;
         this.usuariosFiltrados = this.usuarios;
       },

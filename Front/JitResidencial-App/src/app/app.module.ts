@@ -1,49 +1,37 @@
 /* ---------------------- ANGULAR IMPORTS ---------------------- */
-import { BrowserAnimationsModule }
-        from '@angular/platform-browser/animations';
-import { BrowserModule }
-        from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule }
-        from '@angular/core';
-import { CommonModule }
-        from '@angular/common';
-import { FormsModule, ReactiveFormsModule }
-        from '@angular/forms';
-import { HttpClientModule }
-        from '@angular/common/http';
+import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
+import { BrowserModule }            from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA,
+         NgModule }                 from '@angular/core';
+import { CommonModule }             from '@angular/common';
+import { FormsModule,
+         ReactiveFormsModule }      from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS }         from '@angular/common/http';
 
 /* ---------------------- BOOTSTRAP IMPORTS ---------------------- */
-import {BsDatepickerModule}
-        from 'ngx-bootstrap/datepicker';
-import { BsDropdownModule }
-        from 'ngx-bootstrap/dropdown';
-import { CollapseModule }
-        from 'ngx-bootstrap/collapse';
-import { NgxSpinnerModule }
-        from 'ngx-spinner';
-import { ModalModule }
-        from 'ngx-bootstrap/modal';
-import { ToastContainerModule, ToastrModule }
-        from 'ngx-toastr';
-import { TooltipModule }
-        from 'ngx-bootstrap/tooltip';
+import {BsDatepickerModule}         from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule }         from 'ngx-bootstrap/dropdown';
+import { CollapseModule }           from 'ngx-bootstrap/collapse';
+import { NgxSpinnerModule }         from 'ngx-spinner';
+import { ModalModule }              from 'ngx-bootstrap/modal';
+import { ToastContainerModule,
+         ToastrModule }             from 'ngx-toastr';
+import { TooltipModule }            from 'ngx-bootstrap/tooltip';
 
 /* ---------------------- SUPPORT IMPORTS ---------------------- */
-import { AppComponent }
-        from './app.component';
-import { AppRoutingModule }
-        from './app-routing.module';
+import { AppComponent }             from './app.component';
+import { AppRoutingModule }         from './app-routing.module';
 
 /* ---------------------- HELPERS IMPORTS ---------------------- */
-import { DateTimeFormatPipe }
-        from './helpers/DateTimeFormat.pipe';
+import { DateTimeFormatPipe }       from './helpers/DateTimeFormat.pipe';
 
 /* ---------------------- Serices IMPORTS ---------------------- */
-import { ProdutoService }
-        from './Services/produto/produto.service';
+import { ProdutoService }           from './Services/produto/produto.service';
+import { ContaService }             from './Services/conta/conta.service';
 
 /* ---------------------- COMPONENTS IMPORTS ---------------------- */
-import { LoginComponent }  from './components/User/login/login.component';
+import { LoginComponent }           from './components/conta/login/login.component';
+
 import { ProdutoDetalheComponent } from './components/produto/produto-detalhe/produto-detalhe.component';
 
 import { CategoriaComponent }     from './components/categoria/categoria.component';
@@ -58,15 +46,16 @@ import { NavComponent }           from './shared/nav/nav.component';
 import { ProdutoComponent }       from './components/produto/produto.component';
 import { TitleComponent }        from './shared/title/title.component';
 import { UnidadeMedidaComponent } from './components/unidadeMedida/unidadeMedida.component';
-import { UsuarioComponent }       from './components/usuario/usuario.component';
+import { ContaComponent }       from './components/conta/conta.component';
 import { ProdutoListaComponent }  from './components/produto/produto-lista/produto-lista.component';
-import { RegistrationComponent }
-                                  from './components/User/Registration/registration.component';
+import { CadastroComponent }
+                                  from './components/conta/cadastro/cadastro.component';
 import { ProfileComponent } from './components/User/Profile/profile.component';
 import { UsuarioListaComponent }  from './components/usuario/usuarioLista/usuario-lista.component';
-import { UserService }         from './Services/user/user.service';
 import { defineLocale }           from 'ngx-bootstrap/chronos';
 import { ptBrLocale }             from 'ngx-bootstrap/locale';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 
 defineLocale('pt-br', ptBrLocale);
 @NgModule({
@@ -74,8 +63,10 @@ defineLocale('pt-br', ptBrLocale);
     AppComponent,
 
     LoginComponent,
+    ContaComponent,
+
     ProfileComponent,
-    RegistrationComponent,
+    CadastroComponent,
     TitleComponent,
 
     CategoriaComponent,
@@ -93,7 +84,7 @@ defineLocale('pt-br', ptBrLocale);
     ProdutoListaComponent,
 
     UnidadeMedidaComponent,
-    UsuarioComponent,
+
 
     UsuarioListaComponent,
 
@@ -121,7 +112,8 @@ defineLocale('pt-br', ptBrLocale);
     }),
     TooltipModule.forRoot(),
   ],
-  providers: [ProdutoService, UserService],
+  providers: [ProdutoService, ContaService,
+  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
