@@ -8,7 +8,7 @@ namespace JitResidencial.API.Extensions
         {
             return user.FindFirst(ClaimTypes.Name)?.Value; 
         }
-        public static int GerUserId(this ClaimsPrincipal user)
+        public static int GetUserId(this ClaimsPrincipal user)
         {
             return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
         }

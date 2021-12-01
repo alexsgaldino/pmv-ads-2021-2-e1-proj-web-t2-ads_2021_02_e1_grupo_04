@@ -5,13 +5,13 @@ namespace JitResidencial.Application.Contratos
 {
     public interface IProdutoService
     {
-        Task<ProdutoDto> AddProdutos(ProdutoDto model);
-        Task<ProdutoDto> UpdateProduto(int produtoId, ProdutoDto model);
-        Task<bool> DeleteProduto(int produtoId);
+        Task<ProdutoDto> IncluirProdutos(int userId, ProdutoDto model);
+        Task<ProdutoDto> AlterarProduto(int userId, int id, ProdutoDto model);
+        Task<bool> ExcluirProduto(int userId, int id);
         
-        Task<ProdutoDto[]> GetAllProdutosByNomeProdutoAsync(string nomeProduto);
-        Task<ProdutoDto[]> GetAllProdutosByCodigoBarrasAsync(string codigoBarras);
-        Task<ProdutoDto[]> GetAllProdutosAsync();
-        Task<ProdutoDto> GetProdutoByIdAsync(int produtoId);
+        Task<ProdutoDto[]>RecuperarProdutosPorNomeProdutoAsync(int userId, string nomeProduto);
+        Task<ProdutoDto[]> RecuperarProdutosPorCodigoBarrasAsync(int userId, string codigoBarras);
+        Task<ProdutoDto[]> RecuperarProdutosAsync(int userId);
+        Task<ProdutoDto> RecuperarProdutoPorIdAsync(int userId, int id);
     }
 }

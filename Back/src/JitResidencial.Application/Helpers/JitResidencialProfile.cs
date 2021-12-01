@@ -11,9 +11,9 @@ namespace JitResidencial.Application.Helpers
         {
             CreateMap<Produto, ProdutoDto>().ReverseMap();
             
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, UserLoginDto>().ReverseMap();
-            CreateMap<User, UserUpdateDto>().ReverseMap();
+            CreateMap<User, ContaDto>().ReverseMap();
+            CreateMap<User, ContaLoginDto>().ReverseMap();
+            CreateMap<User, AlterarContaDto>().ReverseMap();
         }
     }
 }

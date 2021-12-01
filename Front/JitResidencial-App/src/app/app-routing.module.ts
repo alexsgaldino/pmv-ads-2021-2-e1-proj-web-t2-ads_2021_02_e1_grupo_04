@@ -1,5 +1,3 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { EnderecoComponent } from './components/usuario/endereco/endereco.component';
 import { EstoqueComponent } from './components/estoque/estoque.component';

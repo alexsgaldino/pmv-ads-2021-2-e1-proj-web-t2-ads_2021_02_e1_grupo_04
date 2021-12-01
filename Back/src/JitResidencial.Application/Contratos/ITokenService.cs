@@ -5,6 +5,6 @@ namespace JitResidencial.Application.Contratos
 {
     public interface ITokenService
     {
-        Task<string> CreateToken(UserUpdateDto userUpdateDto);
+        Task<string> CreateToken(AlterarContaDto alterarContaDto);
     }
 }

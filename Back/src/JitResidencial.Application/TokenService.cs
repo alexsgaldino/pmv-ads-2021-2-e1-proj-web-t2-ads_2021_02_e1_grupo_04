@@ -32,17 +32,17 @@ namespace JitResidencial.Application
             _mapper = mapper;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public async Task<string> CreateToken(UserUpdateDto userUpdateDto)
+        public async Task<string> CreateToken(AlterarContaDto alterarContaDto)
         {
-            var user = _mapper.Map<User>(userUpdateDto);
+            var conta = _mapper.Map<User>(alterarContaDto);
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.NameIdentifier, conta.Id.ToString()),
+                new Claim(ClaimTypes.Name, conta.UserName)
             };
 
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(conta);
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 

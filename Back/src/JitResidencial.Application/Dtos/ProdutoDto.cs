@@ -24,7 +24,7 @@ namespace JitResidencial.Application.Dtos
         public int CategoriaId  {get; set;}
         public int MovimentoId { get; set; }
         public int EstoqueId { get; set; }
-        public int ListaPrecoId { get; set; }
-        public int FornecedorId { get; set; }  
+        public int UserId { get; set; }
+        public ContaDto ContaDto { get; set; }
     }
 }

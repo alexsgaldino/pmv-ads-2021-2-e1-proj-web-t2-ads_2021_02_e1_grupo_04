@@ -83,12 +83,12 @@ namespace JitResidencial.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IProdutoService, ProdutoService>();
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IContaService, ContaService>();
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped<IGlobalPersist, GlobalPersist>();
             services.AddScoped<IProdutoPersist, ProdutoPersist>(); 
-            services.AddScoped<IUserPersist, UserPersist>(); 
+            services.AddScoped<IContaPersist, ContaPersist>(); 
 
             services.AddCors();
             services.AddSwaggerGen(options =>
